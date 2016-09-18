@@ -13,6 +13,7 @@
 		73E6B0B31D8E1B2000225920 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 73E6B0B21D8E1B2000225920 /* Assets.xcassets */; };
 		73E6B0B61D8E1B2000225920 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 73E6B0B41D8E1B2000225920 /* LaunchScreen.storyboard */; };
 		73E6B0C11D8E1B2000225920 /* IITPlannerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73E6B0C01D8E1B2000225920 /* IITPlannerTests.swift */; };
+		73E6B0CF1D8F37A600225920 /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 73E6B0CD1D8F37A600225920 /* Model.xcdatamodeld */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,6 +37,7 @@
 		73E6B0BC1D8E1B2000225920 /* IITPlannerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = IITPlannerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		73E6B0C01D8E1B2000225920 /* IITPlannerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IITPlannerTests.swift; sourceTree = "<group>"; };
 		73E6B0C21D8E1B2000225920 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		73E6B0CE1D8F37A600225920 /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -80,6 +82,7 @@
 				73E6B0AB1D8E1B2000225920 /* AppDelegate.swift */,
 				73E6B0AD1D8E1B2000225920 /* ViewController.swift */,
 				73E6B0AF1D8E1B2000225920 /* Main.storyboard */,
+				73E6B0CD1D8F37A600225920 /* Model.xcdatamodeld */,
 				73E6B0B21D8E1B2000225920 /* Assets.xcassets */,
 				73E6B0B41D8E1B2000225920 /* LaunchScreen.storyboard */,
 				73E6B0B71D8E1B2000225920 /* Info.plist */,
@@ -203,6 +206,7 @@
 			files = (
 				73E6B0AE1D8E1B2000225920 /* ViewController.swift in Sources */,
 				73E6B0AC1D8E1B2000225920 /* AppDelegate.swift in Sources */,
+				73E6B0CF1D8F37A600225920 /* Model.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -422,6 +426,19 @@
 			defaultConfigurationIsVisible = 0;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		73E6B0CD1D8F37A600225920 /* Model.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				73E6B0CE1D8F37A600225920 /* Model.xcdatamodel */,
+			);
+			currentVersion = 73E6B0CE1D8F37A600225920 /* Model.xcdatamodel */;
+			path = Model.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 73E6B0A01D8E1B2000225920 /* Project object */;
 }

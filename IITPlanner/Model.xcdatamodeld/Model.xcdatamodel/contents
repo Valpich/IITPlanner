@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="11232" systemVersion="16A313a" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="Course" syncable="YES">
+        <attribute name="alarm" optional="YES" attributeType="Boolean" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="notification" optional="YES" attributeType="Boolean" usesScalarValueType="YES" syncable="YES"/>
+        <relationship name="dates" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Dates" syncable="YES"/>
+    </entity>
+    <entity name="Dates" syncable="YES">
+        <attribute name="date1" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="date2" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
+    </entity>
+    <elements>
+        <element name="Course" positionX="-63" positionY="-18" width="128" height="103"/>
+        <element name="Dates" positionX="-81" positionY="146" width="144" height="73"/>
+    </elements>
+</model>
