@@ -15,6 +15,9 @@ class ViewController: UIViewController, UITableViewDataSource {
     
     @IBOutlet weak var coursesList: UITableView!
     
+    
+    //Useless
+    /*
     @IBAction func addCourse(_ sender: UIBarButtonItem) {
         let alert = UIAlertController(title: "New course",
                                       message: "Add a new course",
@@ -42,7 +45,7 @@ class ViewController: UIViewController, UITableViewDataSource {
 
         present(alert, animated: true, completion: nil)
     }
-    
+    */
     
     override func viewDidLoad() {
         super.viewDidLoad()

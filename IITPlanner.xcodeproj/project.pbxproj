@@ -14,6 +14,7 @@
 		73E6B0B61D8E1B2000225920 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 73E6B0B41D8E1B2000225920 /* LaunchScreen.storyboard */; };
 		73E6B0C11D8E1B2000225920 /* IITPlannerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73E6B0C01D8E1B2000225920 /* IITPlannerTests.swift */; };
 		73E6B0CF1D8F37A600225920 /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 73E6B0CD1D8F37A600225920 /* Model.xcdatamodeld */; };
+		73E6B1001D8F68B600225920 /* CourseCreatorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73E6B0FF1D8F68B600225920 /* CourseCreatorViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -38,6 +39,8 @@
 		73E6B0C01D8E1B2000225920 /* IITPlannerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IITPlannerTests.swift; sourceTree = "<group>"; };
 		73E6B0C21D8E1B2000225920 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		73E6B0CE1D8F37A600225920 /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
+		73E6B0FF1D8F68B600225920 /* CourseCreatorViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CourseCreatorViewController.swift; sourceTree = "<group>"; };
+		73E6B1011D8F7E8E00225920 /* IITPlanner.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = IITPlanner.entitlements; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -79,9 +82,11 @@
 		73E6B0AA1D8E1B2000225920 /* IITPlanner */ = {
 			isa = PBXGroup;
 			children = (
+				73E6B1011D8F7E8E00225920 /* IITPlanner.entitlements */,
 				73E6B0AB1D8E1B2000225920 /* AppDelegate.swift */,
 				73E6B0AD1D8E1B2000225920 /* ViewController.swift */,
 				73E6B0AF1D8E1B2000225920 /* Main.storyboard */,
+				73E6B0FF1D8F68B600225920 /* CourseCreatorViewController.swift */,
 				73E6B0CD1D8F37A600225920 /* Model.xcdatamodeld */,
 				73E6B0B21D8E1B2000225920 /* Assets.xcassets */,
 				73E6B0B41D8E1B2000225920 /* LaunchScreen.storyboard */,
@@ -152,6 +157,11 @@
 						DevelopmentTeam = 57K4Z8397N;
 						LastSwiftMigration = 0800;
 						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.Push = {
+								enabled = 1;
+							};
+						};
 					};
 					73E6B0BB1D8E1B2000225920 = {
 						CreatedOnToolsVersion = 8.0;
@@ -206,6 +216,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				73E6B1001D8F68B600225920 /* CourseCreatorViewController.swift in Sources */,
 				73E6B0AE1D8E1B2000225920 /* ViewController.swift in Sources */,
 				73E6B0AC1D8E1B2000225920 /* AppDelegate.swift in Sources */,
 				73E6B0CF1D8F37A600225920 /* Model.xcdatamodeld in Sources */,
@@ -347,6 +358,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = IITPlanner/IITPlanner.entitlements;
 				DEVELOPMENT_TEAM = 57K4Z8397N;
 				INFOPLIST_FILE = IITPlanner/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -360,6 +372,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = IITPlanner/IITPlanner.entitlements;
 				DEVELOPMENT_TEAM = 57K4Z8397N;
 				INFOPLIST_FILE = IITPlanner/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -418,6 +431,7 @@
 				73E6B0C71D8E1B2000225920 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		73E6B0C81D8E1B2000225920 /* Build configuration list for PBXNativeTarget "IITPlannerTests" */ = {
 			isa = XCConfigurationList;
@@ -426,6 +440,7 @@
 				73E6B0CA1D8E1B2000225920 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 

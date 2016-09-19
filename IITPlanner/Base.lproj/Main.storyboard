@@ -23,7 +23,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <connections>
-                                    <outlet property="dataSource" destination="BYZ-38-t0r" id="UaK-MC-iUP"/>
+                                    <outlet property="dataSource" destination="BYZ-38-t0r" id="zj3-lk-UIy"/>
                                 </connections>
                             </tableView>
                         </subviews>
@@ -32,17 +32,54 @@
                     <navigationItem key="navigationItem" id="HPT-nA-Tzf">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="8gL-Xy-foo">
                             <connections>
-                                <action selector="addCourse:" destination="BYZ-38-t0r" id="wHc-lA-j6o"/>
+                                <segue destination="mwC-Eb-giD" kind="show" id="M9p-Vp-YeP"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="coursesList" destination="qRu-xn-fHk" id="a8q-do-mAp"/>
+                        <outlet property="coursesList" destination="qRu-xn-fHk" id="Ty9-gU-jhh"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="988" y="-566"/>
+        </scene>
+        <!--CourseCreatorViewController-->
+        <scene sceneID="0sh-04-aL9">
+            <objects>
+                <viewController title="CourseCreatorViewController" id="mwC-Eb-giD" customClass="CourseCreatorViewController" customModule="IITPlanner" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="AAh-9K-naZ"/>
+                        <viewControllerLayoutGuide type="bottom" id="e4D-qq-KT6"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" misplaced="YES" id="AkL-nM-Vcl">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <pickerView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="y6v-Ec-FOY">
+                                <frame key="frameInset" minX="95.5" minY="336" height="52" maxX="97.5"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                            </pickerView>
+                            <datePicker contentMode="scaleToFill" fixedFrame="YES" enabled="NO" selected="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="time" minuteInterval="5" translatesAutoresizingMaskIntoConstraints="NO" id="DzV-pT-Yw3">
+                                <frame key="frameInset" minX="58.5" minY="408" height="45" maxX="58.5"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                <date key="date" timeIntervalSinceReferenceDate="495937372.40097803">
+                                    <!--2016-09-19 00:22:52 +0000-->
+                                </date>
+                                <connections>
+                                    <action selector="handleTimeUpdated:" destination="mwC-Eb-giD" eventType="valueChanged" id="ZhG-WF-6Vu"/>
+                                </connections>
+                            </datePicker>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <connections>
+                        <outlet property="dayOfWeakPicker" destination="y6v-Ec-FOY" id="yzn-Ph-UnI"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="oT8-WC-K0U" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2040.8" y="-560.86956521739137"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="Tqi-wv-fNv">
@@ -55,7 +92,7 @@
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="JTy-ka-fTt"/>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="TZf-tH-BhF"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="40g-6V-Jy6" userLabel="First Responder" sceneMemberID="firstResponder"/>
