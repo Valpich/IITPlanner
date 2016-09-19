@@ -21,20 +21,36 @@ class CourseCreatorViewController: UIViewController,UIPickerViewDelegate, UIPick
     var pickerData: [String] = [String]()
     var dayValue : String?
     var dateTime : Date?
+    var notification : Bool?
+    var alarm : Bool?
+    var courseName : String?
+    var address : String?
+    var zipCode : Int?
+    var city : String?
+    var Country : String?
     
     @IBAction func handleTimeUpdated(_ sender: UIDatePicker) {
         dateTime = sender.date
         print(dateTime!)
     }
     
-    override func viewDidLoad() {
+    @IBAction func alarmUpdated(_ sender: UISwitch) {
+        alarm = sender.isOn
+        print(alarm!)
+    }
+
+    @IBAction func notificationUpdated(_ sender: UISwitch) {
+        notification = sender.isOn
+        print(notification!)
+    }
+    
+        override func viewDidLoad() {
         super.viewDidLoad()
         pickerData = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
         // Connect data:
         self.dayOfWeakPicker.delegate = self
         self.dayOfWeakPicker.dataSource = self
     }
-
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
