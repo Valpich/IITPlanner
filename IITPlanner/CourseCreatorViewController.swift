@@ -14,10 +14,8 @@ extension Date {
     }
 }
 
+class CourseCreatorViewController: UIViewController,UIPickerViewDelegate, UIPickerViewDataSource, UITextFieldDelegate {
 
-class CourseCreatorViewController: UIViewController,UIPickerViewDelegate, UIPickerViewDataSource {
-
-    @IBOutlet weak var dayOfWeakPicker: UIPickerView!
     var pickerData: [String] = [String]()
     var dayValue : String?
     var dateTime : Date?
@@ -27,11 +25,19 @@ class CourseCreatorViewController: UIViewController,UIPickerViewDelegate, UIPick
     var address : String?
     var zipCode : Int?
     var city : String?
-    var Country : String?
+    var country : String?
+    
+    @IBOutlet weak var dayOfWeakPicker: UIPickerView!
+    @IBOutlet weak var addressTextField: UITextField!
+    @IBOutlet weak var zipcodeTextField: UITextField!
+    @IBOutlet weak var cityTextField: UITextField!
+    @IBOutlet weak var countryTextField: UITextField!
+    @IBOutlet weak var courseTextField: UITextField!
     
     @IBAction func handleTimeUpdated(_ sender: UIDatePicker) {
         dateTime = sender.date
         print(dateTime!)
+        print(addressTextField.text!)
     }
     
     @IBAction func alarmUpdated(_ sender: UISwitch) {
@@ -44,13 +50,14 @@ class CourseCreatorViewController: UIViewController,UIPickerViewDelegate, UIPick
         print(notification!)
     }
     
-        override func viewDidLoad() {
+    override func viewDidLoad() {
         super.viewDidLoad()
         pickerData = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
         // Connect data:
         self.dayOfWeakPicker.delegate = self
         self.dayOfWeakPicker.dataSource = self
     }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -79,6 +86,16 @@ class CourseCreatorViewController: UIViewController,UIPickerViewDelegate, UIPick
         print(dayValue!)
     }
     
+    func textFieldShouldReturn(textField: UITextField) -> Bool{
+        /* if textField == self.text1 {
+            self.text2.becomeFirstResponder()
+        }else if textField == self.text2{
+            self.text3.becomeFirstResponder()
+        }else{
+            self.text1.becomeFirstResponder()
+        }*/
+        return true
+    }
     
     /*
     // MARK: - Navigation

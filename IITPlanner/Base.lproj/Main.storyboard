@@ -52,11 +52,11 @@
                         <viewControllerLayoutGuide type="top" id="AAh-9K-naZ"/>
                         <viewControllerLayoutGuide type="bottom" id="e4D-qq-KT6"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="AkL-nM-Vcl">
+                    <view key="view" contentMode="scaleToFill" id="AkL-nM-Vcl" userLabel="Full view">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="koS-tg-sP0">
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="koS-tg-sP0" userLabel="Full view">
                                 <frame key="frameInset" minX="-22" minY="48" width="421" height="619"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
@@ -66,7 +66,7 @@
                                         <fontDescription key="fontDescription" type="system" pointSize="22"/>
                                         <state key="normal" title="Validate"/>
                                     </button>
-                                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="7SI-Bj-Afc">
+                                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="7SI-Bj-Afc" userLabel="Address view">
                                         <frame key="frameInset" minX="20" minY="97" width="381" height="183"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <subviews>
@@ -83,6 +83,9 @@
                                                 <nil key="textColor"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                                 <textInputTraits key="textInputTraits" returnKeyType="continue" enablesReturnKeyAutomatically="YES"/>
+                                                <connections>
+                                                    <outlet property="delegate" destination="AkL-nM-Vcl" id="2JZ-8E-ieD"/>
+                                                </connections>
                                             </textField>
                                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="ZIP Code" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="wjA-ym-3b9">
                                                 <frame key="frameInset" minX="20" minY="97" width="104" height="30"/>
@@ -90,6 +93,9 @@
                                                 <nil key="textColor"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                                 <textInputTraits key="textInputTraits" returnKeyType="continue" enablesReturnKeyAutomatically="YES"/>
+                                                <connections>
+                                                    <outlet property="delegate" destination="AkL-nM-Vcl" id="t3s-4Z-Isl"/>
+                                                </connections>
                                             </textField>
                                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Address" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="uvT-fV-h5g">
                                                 <frame key="frameInset" minX="20" minY="59" width="338" height="30"/>
@@ -97,6 +103,9 @@
                                                 <nil key="textColor"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                                 <textInputTraits key="textInputTraits" returnKeyType="continue" enablesReturnKeyAutomatically="YES"/>
+                                                <connections>
+                                                    <outlet property="delegate" destination="AkL-nM-Vcl" id="jjo-sw-pVq"/>
+                                                </connections>
                                             </textField>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Address:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="drj-d7-a9W">
                                                 <frame key="frameInset" minX="20" minY="20" width="83" height="31"/>
@@ -107,11 +116,11 @@
                                             </label>
                                         </subviews>
                                     </view>
-                                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="0UG-v4-pwi">
+                                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="0UG-v4-pwi" userLabel="Bottom view">
                                         <frame key="frameInset" minX="40" minY="264" width="338" height="297"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <subviews>
-                                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Kci-3K-Bgn">
+                                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Kci-3K-Bgn" userLabel="Notification view">
                                                 <frame key="frameInset" minX="20" minY="141" width="298" height="71"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <subviews>
@@ -132,7 +141,7 @@
                                                 </subviews>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             </view>
-                                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qoH-ma-FNS">
+                                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qoH-ma-FNS" userLabel="Alarm view">
                                                 <frame key="frameInset" minX="20" minY="206" width="298" height="71"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <subviews>
@@ -169,7 +178,7 @@
                                             </pickerView>
                                         </subviews>
                                     </view>
-                                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="KBg-W0-2HH">
+                                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="KBg-W0-2HH" userLabel="Course name view">
                                         <frame key="frameInset" minX="21" minY="20" width="380" height="109"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <subviews>
@@ -196,7 +205,12 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <connections>
+                        <outlet property="addressTextField" destination="uvT-fV-h5g" id="i5b-xX-Rpq"/>
+                        <outlet property="cityTextField" destination="pV4-mb-2UC" id="pQY-rH-WsO"/>
+                        <outlet property="countryTextField" destination="P1u-Ou-84S" id="DJ0-aZ-Z7w"/>
+                        <outlet property="courseTextField" destination="HbO-fF-Vsc" id="hdi-jF-max"/>
                         <outlet property="dayOfWeakPicker" destination="y6v-Ec-FOY" id="yzn-Ph-UnI"/>
+                        <outlet property="zipcodeTextField" destination="wjA-ym-3b9" id="YMa-gd-Lqk"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="oT8-WC-K0U" userLabel="First Responder" sceneMemberID="firstResponder"/>
