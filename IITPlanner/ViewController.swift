@@ -21,6 +21,8 @@ class ViewController: UIViewController, UITableViewDataSource {
         title = "Your list of courses"
     }
 
+    @IBAction func unwindToMenu(segue: UIStoryboardSegue) {}
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
@@ -32,6 +34,20 @@ class ViewController: UIViewController, UITableViewDataSource {
         } catch let error as NSError {
             print("Could not fetch \(error), \(error.userInfo)")
         }
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        let managedContext = appDelegate.managedObjectContext
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Course")
+        do {
+            let results = try managedContext.fetch(fetchRequest)
+            courses = results as! [NSManagedObject]
+        } catch let error as NSError {
+            print("Could not fetch \(error), \(error.userInfo)")
+        }
+        coursesList.reloadData()
     }
     
     override func didReceiveMemoryWarning() {

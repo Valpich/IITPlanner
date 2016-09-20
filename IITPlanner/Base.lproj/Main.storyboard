@@ -24,10 +24,10 @@
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="CourseCell" rowHeight="180" id="uFo-tj-ytU" customClass="CourseTableViewCell" customModule="IITPlanner" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="375" height="180"/>
+                                        <rect key="frame" x="0.0" y="92" width="375" height="180"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="uFo-tj-ytU" id="xbb-wq-KOr">
-                                            <frame key="frameInset" width="375" height="179.5"/>
+                                            <frame key="frameInset" width="375" height="179"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7Tk-b7-RbE">
@@ -153,7 +153,7 @@
                                         <state key="normal" title="Validate"/>
                                         <connections>
                                             <action selector="validatePressed:" destination="mwC-Eb-giD" eventType="touchUpInside" id="zuT-W2-YYz"/>
-                                            <segue destination="BYZ-38-t0r" kind="show" id="hHc-DK-mXS"/>
+                                            <segue destination="Mad-la-jPM" kind="unwind" unwindAction="unwindToMenuWithSegue:" id="uGf-lX-l8Y"/>
                                         </connections>
                                     </button>
                                     <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="7SI-Bj-Afc" userLabel="Address view">
@@ -312,13 +312,14 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="oT8-WC-K0U" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="Mad-la-jPM" userLabel="Exit" sceneMemberID="exit"/>
                 <tapGestureRecognizer id="Kb5-cQ-lgX">
                     <connections>
                         <action selector="tapGestureRecognizer:" destination="mwC-Eb-giD" id="GIu-ZI-vkN"/>
                     </connections>
                 </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="2040.8" y="-560.86956521739137"/>
+            <point key="canvasLocation" x="2372" y="-566"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="Tqi-wv-fNv">
@@ -339,7 +340,4 @@
             <point key="canvasLocation" x="133.59999999999999" y="-543.77811094452773"/>
         </scene>
     </scenes>
-    <inferredMetricsTieBreakers>
-        <segue reference="hHc-DK-mXS"/>
-    </inferredMetricsTieBreakers>
 </document>

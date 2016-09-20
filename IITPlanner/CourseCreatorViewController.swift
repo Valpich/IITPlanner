@@ -40,7 +40,6 @@ class CourseCreatorViewController: UIViewController,UIPickerViewDelegate, UIPick
     @IBOutlet weak var notification: UISwitch!
     @IBOutlet weak var alarm: UISwitch!
     
-
     @IBAction func validatePressed(_ sender: UIButton) {
         dayValue = pickerData[dayOfTheWeek.selectedRow(inComponent: 0)]
         dateTime = hour.date
