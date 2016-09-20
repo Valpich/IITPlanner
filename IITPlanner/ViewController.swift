@@ -69,20 +69,6 @@ class ViewController: UIViewController, UITableViewDataSource {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
-
-    func saveName(name: String) {
-        let appDelegate = UIApplication.shared.delegate as! AppDelegate
-        let managedContext = appDelegate.managedObjectContext
-        let entity =  NSEntityDescription.entity(forEntityName: "Course", in:managedContext)
-        let course = NSManagedObject(entity: entity!, insertInto: managedContext)
-        course.setValue(name, forKey: "name")
-        do {
-            try managedContext.save()
-            courses.append(course)
-        } catch let error as NSError  {
-            print("Could not save \(error), \(error.userInfo)")
-        }
-    }
     
     // MARK: UITableViewDataSource
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

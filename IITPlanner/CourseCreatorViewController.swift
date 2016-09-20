@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreData
 
 extension Date {
     var localTime: String {
@@ -27,6 +28,8 @@ class CourseCreatorViewController: UIViewController,UIPickerViewDelegate, UIPick
     var city : String?
     var country : String?
     
+    var courses = [NSManagedObject]()
+
     @IBOutlet weak var addressTextField: UITextField!
     @IBOutlet weak var zipcodeTextField: UITextField!
     @IBOutlet weak var cityTextField: UITextField!
@@ -47,6 +50,7 @@ class CourseCreatorViewController: UIViewController,UIPickerViewDelegate, UIPick
         zipcode = zipcodeTextField.text
         city = cityTextField.text
         country = courseTextField.text
+        address = addressTextField.text
         print(dayValue!)
         print(dateTime!)
         print(isNotification!)
@@ -54,7 +58,11 @@ class CourseCreatorViewController: UIViewController,UIPickerViewDelegate, UIPick
         print(courseName!)
         print(zipcode!)
         print(city!)
+        print(address!)
         print(country!)
+        if(true){
+            saveCourse(name: courseName!, address: address!, zipcode: zipcode!, city: city!, country: country!, day: dayValue!, hour: dateTime!, alarm: isAlarm!, notification: isNotification!)
+        }
     }
 
     @IBAction func tapGestureRecognizer(_ sender: UITapGestureRecognizer) {
@@ -116,7 +124,7 @@ class CourseCreatorViewController: UIViewController,UIPickerViewDelegate, UIPick
         print(dayValue!)
     }
     
-    func textFieldShouldReturn(textField: UITextField) -> Bool{
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool{
         /* if textField == self.text1 {
             self.text2.becomeFirstResponder()
         }else if textField == self.text2{
@@ -125,6 +133,22 @@ class CourseCreatorViewController: UIViewController,UIPickerViewDelegate, UIPick
             self.text1.becomeFirstResponder()
         }*/
         return true
+    }
+    
+    // MARK: - Persistance
+    
+    func saveCourse(name: String, address: String, zipcode: String, city: String, country: String?, day: String, hour: Date, alarm: Bool, notification: Bool) {
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        let managedContext = appDelegate.managedObjectContext
+        let entity =  NSEntityDescription.entity(forEntityName: "Course", in:managedContext)
+        let course = NSManagedObject(entity: entity!, insertInto: managedContext)
+        course.setValue(name, forKey: "name")
+        do {
+            try managedContext.save()
+            courses.append(course)
+        } catch let error as NSError  {
+            print("Could not save \(error), \(error.userInfo)")
+        }
     }
     
     /*
