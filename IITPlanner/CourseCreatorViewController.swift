@@ -95,10 +95,20 @@ class CourseCreatorViewController: UIViewController,UIPickerViewDelegate, UIPick
         self.dayOfTheWeek.delegate = self
         self.dayOfTheWeek.dataSource = self
     }
-    
+
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    @IBAction func test(_ sender: UITextField) {
+        if((sender.text?.characters.count)! > 5){
+            var zip = ""
+            zip = sender.text!
+            let cutString = zip.substring(to: zip.index(zip.startIndex, offsetBy: 5))
+            
+            sender.text = cutString
+        }
     }
     
     // The number of columns of data
@@ -123,6 +133,8 @@ class CourseCreatorViewController: UIViewController,UIPickerViewDelegate, UIPick
         dayValue = pickerData[row]
         print(dayValue!)
     }
+    
+    @IBOutlet weak var test: UITextField!
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool{
         /* if textField == self.text1 {
