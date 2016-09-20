@@ -55,14 +55,16 @@ class CourseCreatorViewController: UIViewController,UIPickerViewDelegate, UIPick
         print(zipcode!)
         print(city!)
         print(country!)
-
-        print("Yo bitch")
     }
 
+    @IBAction func tapGestureRecognizer(_ sender: UITapGestureRecognizer) {
+        view.endEditing(true)
+    }
+    
     @IBAction func endEditingCourseName(_ sender: UITextField) {
         addressTextField.becomeFirstResponder()
     }
-    
+
     @IBAction func endEditingAddress(_ sender: UITextField) {
         zipcodeTextField.becomeFirstResponder()
     }

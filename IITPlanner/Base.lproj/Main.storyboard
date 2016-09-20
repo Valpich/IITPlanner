@@ -206,6 +206,10 @@
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <gestureRecognizers/>
+                        <connections>
+                            <outletCollection property="gestureRecognizers" destination="Kb5-cQ-lgX" appends="YES" id="S6Y-uN-pff"/>
+                        </connections>
                     </view>
                     <connections>
                         <outlet property="addressTextField" destination="uvT-fV-h5g" id="i5b-xX-Rpq"/>
@@ -220,6 +224,11 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="oT8-WC-K0U" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="Kb5-cQ-lgX">
+                    <connections>
+                        <action selector="tapGestureRecognizer:" destination="mwC-Eb-giD" id="GIu-ZI-vkN"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="2040.8" y="-560.86956521739137"/>
         </scene>
