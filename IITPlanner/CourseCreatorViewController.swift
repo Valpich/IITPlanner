@@ -16,46 +16,74 @@ extension Date {
 
 class CourseCreatorViewController: UIViewController,UIPickerViewDelegate, UIPickerViewDataSource, UITextFieldDelegate {
 
-    var pickerData: [String] = [String]()
+    let pickerData: [String]  = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
     var dayValue : String?
     var dateTime : Date?
-    var notification : Bool?
-    var alarm : Bool?
+    var isNotification : Bool?
+    var isAlarm : Bool?
     var courseName : String?
     var address : String?
-    var zipCode : Int?
+    var zipcode : String?
     var city : String?
     var country : String?
     
-    @IBOutlet weak var dayOfWeakPicker: UIPickerView!
     @IBOutlet weak var addressTextField: UITextField!
     @IBOutlet weak var zipcodeTextField: UITextField!
     @IBOutlet weak var cityTextField: UITextField!
     @IBOutlet weak var countryTextField: UITextField!
     @IBOutlet weak var courseTextField: UITextField!
+    @IBOutlet weak var dayOfTheWeek: UIPickerView!
+    @IBOutlet weak var hour: UIDatePicker!
+    @IBOutlet weak var notification: UISwitch!
+    @IBOutlet weak var alarm: UISwitch!
     
-    @IBAction func handleTimeUpdated(_ sender: UIDatePicker) {
-        dateTime = sender.date
+
+    @IBAction func validatePressed(_ sender: UIButton) {
+        dayValue = dayOfTheWeek.description
+        dateTime = hour.date
+        isNotification = notification.isOn
+        isAlarm = alarm.isOn
+        courseName = courseTextField.text
+        zipcode = zipcodeTextField.text
+        city = cityTextField.text
+        country = courseTextField.text
+        print(dayValue!)
         print(dateTime!)
-        print(addressTextField.text!)
-    }
-    
-    @IBAction func alarmUpdated(_ sender: UISwitch) {
-        alarm = sender.isOn
-        print(alarm!)
+        print(isNotification!)
+        print(isAlarm!)
+        print(courseName!)
+        print(zipcode!)
+        print(city!)
+        print(country!)
+
+        print("Yo bitch")
     }
 
-    @IBAction func notificationUpdated(_ sender: UISwitch) {
-        notification = sender.isOn
-        print(notification!)
+    @IBAction func endEditingCourseName(_ sender: UITextField) {
+        addressTextField.becomeFirstResponder()
+    }
+    
+    @IBAction func endEditingAddress(_ sender: UITextField) {
+        zipcodeTextField.becomeFirstResponder()
+    }
+    
+    @IBAction func endEditingZipcode(_ sender: UITextField) {
+        cityTextField.becomeFirstResponder()
+    }
+    
+    @IBAction func endEditingCity(_ sender: UITextField) {
+        countryTextField.becomeFirstResponder()
+    }
+
+    @IBAction func endEditingCountry(_ sender: UITextField) {
+        self.becomeFirstResponder()
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        pickerData = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
         // Connect data:
-        self.dayOfWeakPicker.delegate = self
-        self.dayOfWeakPicker.dataSource = self
+        self.dayOfTheWeek.delegate = self
+        self.dayOfTheWeek.dataSource = self
     }
     
     override func didReceiveMemoryWarning() {

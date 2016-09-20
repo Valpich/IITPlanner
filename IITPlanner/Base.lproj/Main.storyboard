@@ -65,6 +65,9 @@
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="22"/>
                                         <state key="normal" title="Validate"/>
+                                        <connections>
+                                            <action selector="validatePressed:" destination="mwC-Eb-giD" eventType="touchUpInside" id="zuT-W2-YYz"/>
+                                        </connections>
                                     </button>
                                     <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="7SI-Bj-Afc" userLabel="Address view">
                                         <frame key="frameInset" minX="20" minY="97" width="381" height="183"/>
@@ -76,6 +79,9 @@
                                                 <nil key="textColor"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                                 <textInputTraits key="textInputTraits" returnKeyType="continue" enablesReturnKeyAutomatically="YES"/>
+                                                <connections>
+                                                    <action selector="endEditingCountry:" destination="mwC-Eb-giD" eventType="editingDidEndOnExit" id="5fm-lF-kgH"/>
+                                                </connections>
                                             </textField>
                                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="City" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="pV4-mb-2UC">
                                                 <frame key="frameInset" minX="132" minY="97" width="229" height="30"/>
@@ -84,6 +90,7 @@
                                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                                 <textInputTraits key="textInputTraits" returnKeyType="continue" enablesReturnKeyAutomatically="YES"/>
                                                 <connections>
+                                                    <action selector="endEditingCity:" destination="mwC-Eb-giD" eventType="editingDidEndOnExit" id="9Uw-eD-hNh"/>
                                                     <outlet property="delegate" destination="AkL-nM-Vcl" id="2JZ-8E-ieD"/>
                                                 </connections>
                                             </textField>
@@ -94,6 +101,7 @@
                                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                                 <textInputTraits key="textInputTraits" returnKeyType="continue" enablesReturnKeyAutomatically="YES"/>
                                                 <connections>
+                                                    <action selector="endEditingZipcode:" destination="mwC-Eb-giD" eventType="editingDidEndOnExit" id="P5q-nY-92u"/>
                                                     <outlet property="delegate" destination="AkL-nM-Vcl" id="t3s-4Z-Isl"/>
                                                 </connections>
                                             </textField>
@@ -104,6 +112,7 @@
                                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                                 <textInputTraits key="textInputTraits" returnKeyType="continue" enablesReturnKeyAutomatically="YES"/>
                                                 <connections>
+                                                    <action selector="endEditingAddress:" destination="mwC-Eb-giD" eventType="editingDidEndOnExit" id="Ayu-H4-qsb"/>
                                                     <outlet property="delegate" destination="AkL-nM-Vcl" id="jjo-sw-pVq"/>
                                                 </connections>
                                             </textField>
@@ -134,9 +143,6 @@
                                                     <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="aAw-E9-Lm6">
                                                         <frame key="frameInset" minX="229" minY="20" width="51" height="31"/>
                                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                        <connections>
-                                                            <action selector="notificationUpdated:" destination="mwC-Eb-giD" eventType="valueChanged" id="f2K-An-ETm"/>
-                                                        </connections>
                                                     </switch>
                                                 </subviews>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -155,9 +161,6 @@
                                                     <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="vzc-gS-8S4">
                                                         <frame key="frameInset" minX="229" minY="20" width="51" height="31"/>
                                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                        <connections>
-                                                            <action selector="alarmUpdated:" destination="mwC-Eb-giD" eventType="valueChanged" id="Zjv-tr-GfU"/>
-                                                        </connections>
                                                     </switch>
                                                 </subviews>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -168,9 +171,6 @@
                                                 <date key="date" timeIntervalSinceReferenceDate="495937372.40097803">
                                                     <!--2016-09-19 00:22:52 +0000-->
                                                 </date>
-                                                <connections>
-                                                    <action selector="handleTimeUpdated:" destination="mwC-Eb-giD" eventType="valueChanged" id="ZhG-WF-6Vu"/>
-                                                </connections>
                                             </datePicker>
                                             <pickerView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="y6v-Ec-FOY">
                                                 <frame key="frameInset" minX="78" minY="28" height="52" maxX="78"/>
@@ -188,6 +188,9 @@
                                                 <nil key="textColor"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                                 <textInputTraits key="textInputTraits" returnKeyType="continue" enablesReturnKeyAutomatically="YES"/>
+                                                <connections>
+                                                    <action selector="endEditingCourseName:" destination="mwC-Eb-giD" eventType="editingDidEndOnExit" id="SjY-9U-Jzv"/>
+                                                </connections>
                                             </textField>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Course name:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fbp-0g-xQs">
                                                 <frame key="frameInset" minX="20" minY="20" width="133" height="31"/>
@@ -206,10 +209,13 @@
                     </view>
                     <connections>
                         <outlet property="addressTextField" destination="uvT-fV-h5g" id="i5b-xX-Rpq"/>
+                        <outlet property="alarm" destination="vzc-gS-8S4" id="qd6-nE-66v"/>
                         <outlet property="cityTextField" destination="pV4-mb-2UC" id="pQY-rH-WsO"/>
                         <outlet property="countryTextField" destination="P1u-Ou-84S" id="DJ0-aZ-Z7w"/>
                         <outlet property="courseTextField" destination="HbO-fF-Vsc" id="hdi-jF-max"/>
-                        <outlet property="dayOfWeakPicker" destination="y6v-Ec-FOY" id="yzn-Ph-UnI"/>
+                        <outlet property="dayOfTheWeek" destination="y6v-Ec-FOY" id="okS-bz-Ie5"/>
+                        <outlet property="hour" destination="DzV-pT-Yw3" id="u5K-MP-DO0"/>
+                        <outlet property="notification" destination="aAw-E9-Lm6" id="gwL-cP-98i"/>
                         <outlet property="zipcodeTextField" destination="wjA-ym-3b9" id="YMa-gd-Lqk"/>
                     </connections>
                 </viewController>
