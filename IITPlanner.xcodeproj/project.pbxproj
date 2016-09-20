@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		739C98E71D918C32005B6C6E /* CourseTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 739C98E61D918C32005B6C6E /* CourseTableViewCell.swift */; };
 		73E6B0AC1D8E1B2000225920 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73E6B0AB1D8E1B2000225920 /* AppDelegate.swift */; };
 		73E6B0AE1D8E1B2000225920 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73E6B0AD1D8E1B2000225920 /* ViewController.swift */; };
 		73E6B0B11D8E1B2000225920 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 73E6B0AF1D8E1B2000225920 /* Main.storyboard */; };
@@ -28,6 +29,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		739C98E61D918C32005B6C6E /* CourseTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CourseTableViewCell.swift; sourceTree = "<group>"; };
 		73E6B0A81D8E1B2000225920 /* IITPlanner.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = IITPlanner.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		73E6B0AB1D8E1B2000225920 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		73E6B0AD1D8E1B2000225920 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -86,6 +88,7 @@
 				73E6B0AB1D8E1B2000225920 /* AppDelegate.swift */,
 				73E6B0AD1D8E1B2000225920 /* ViewController.swift */,
 				73E6B0AF1D8E1B2000225920 /* Main.storyboard */,
+				739C98E61D918C32005B6C6E /* CourseTableViewCell.swift */,
 				73E6B0FF1D8F68B600225920 /* CourseCreatorViewController.swift */,
 				73E6B0CD1D8F37A600225920 /* Model.xcdatamodeld */,
 				73E6B0B21D8E1B2000225920 /* Assets.xcassets */,
@@ -220,6 +223,7 @@
 				73E6B0AE1D8E1B2000225920 /* ViewController.swift in Sources */,
 				73E6B0AC1D8E1B2000225920 /* AppDelegate.swift in Sources */,
 				73E6B0CF1D8F37A600225920 /* Model.xcdatamodeld in Sources */,
+				739C98E71D918C32005B6C6E /* CourseTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -362,9 +366,10 @@
 				DEVELOPMENT_TEAM = 57K4Z8397N;
 				INFOPLIST_FILE = IITPlanner/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = Pich.IITPlanner;
+				PRODUCT_BUNDLE_IDENTIFIER = Pich.CoursePlanner;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -376,9 +381,10 @@
 				DEVELOPMENT_TEAM = 57K4Z8397N;
 				INFOPLIST_FILE = IITPlanner/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = Pich.IITPlanner;
+				PRODUCT_BUNDLE_IDENTIFIER = Pich.CoursePlanner;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

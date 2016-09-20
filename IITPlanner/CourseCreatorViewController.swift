@@ -42,15 +42,16 @@ class CourseCreatorViewController: UIViewController,UIPickerViewDelegate, UIPick
     
 
     @IBAction func validatePressed(_ sender: UIButton) {
-        dayValue = dayOfTheWeek.description
+        dayValue = pickerData[dayOfTheWeek.selectedRow(inComponent: 0)]
         dateTime = hour.date
         isNotification = notification.isOn
         isAlarm = alarm.isOn
         courseName = courseTextField.text
         zipcode = zipcodeTextField.text
         city = cityTextField.text
-        country = courseTextField.text
+        country = countryTextField.text
         address = addressTextField.text
+        /*
         print(dayValue!)
         print(dateTime!)
         print(isNotification!)
@@ -60,8 +61,9 @@ class CourseCreatorViewController: UIViewController,UIPickerViewDelegate, UIPick
         print(city!)
         print(address!)
         print(country!)
+        */
         if(true){
-            saveCourse(name: courseName!, address: address!, zipcode: zipcode!, city: city!, country: country!, day: dayValue!, hour: dateTime!, alarm: isAlarm!, notification: isNotification!)
+            saveCourse(name: courseName!, address: address!, zipcode: zipcode!, city: city!, country: country!, day: dayValue!, time: dateTime!, alarm: isAlarm!, notification: isNotification!)
         }
     }
 
@@ -134,7 +136,6 @@ class CourseCreatorViewController: UIViewController,UIPickerViewDelegate, UIPick
         // This method is triggered whenever the user makes a change to the picker selection.
         // The parameter named row and component represents what was selected.
         dayValue = pickerData[row]
-        print(dayValue!)
     }
     
     @IBOutlet weak var test: UITextField!
@@ -152,12 +153,20 @@ class CourseCreatorViewController: UIViewController,UIPickerViewDelegate, UIPick
     
     // MARK: - Persistance
     
-    func saveCourse(name: String, address: String, zipcode: String, city: String, country: String?, day: String, hour: Date, alarm: Bool, notification: Bool) {
+    func saveCourse(name: String, address: String, zipcode: String, city: String, country: String?, day: String, time: Date, alarm: Bool, notification: Bool) {
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         let managedContext = appDelegate.managedObjectContext
         let entity =  NSEntityDescription.entity(forEntityName: "Course", in:managedContext)
         let course = NSManagedObject(entity: entity!, insertInto: managedContext)
         course.setValue(name, forKey: "name")
+        course.setValue(address, forKey: "address")
+        course.setValue(zipcode, forKey: "zipcode")
+        course.setValue(city, forKey: "city")
+        course.setValue(country, forKey: "country")
+        course.setValue(day, forKey: "day")
+        course.setValue(time, forKey: "time")
+        course.setValue(alarm, forKey: "alarm")
+        course.setValue(notification, forKey: "notification")
         do {
             try managedContext.save()
             courses.append(course)

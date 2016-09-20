@@ -9,48 +9,16 @@
 import UIKit
 import CoreData
 
+
 class ViewController: UIViewController, UITableViewDataSource {
 
     var courses = [NSManagedObject]()
     
     @IBOutlet weak var coursesList: UITableView!
     
-    
-    //Useless
-    /*
-    @IBAction func addCourse(_ sender: UIBarButtonItem) {
-        let alert = UIAlertController(title: "New course",
-                                      message: "Add a new course",
-                                      preferredStyle: .alert)
-        
-        let saveAction = UIAlertAction(title: "Save",
-                                       style: .default,
-                                       handler: { (action:UIAlertAction) -> Void in
-                                        
-                                        let textField = alert.textFields!.first
-                                        self.saveName(name: textField!.text!)
-                                        self.coursesList.reloadData()
-        })
-        
-        let cancelAction = UIAlertAction(title: "Cancel",
-                                         style: .default) { (action: UIAlertAction) -> Void in
-        }
-        
-        alert.addTextField {
-            (textField: UITextField) -> Void in
-        }
-
-        alert.addAction(cancelAction)
-        alert.addAction(saveAction)
-
-        present(alert, animated: true, completion: nil)
-    }
-    */
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "Your list of courses"
-        coursesList.register(UITableViewCell.self, forCellReuseIdentifier: "Cell")
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -76,10 +44,52 @@ class ViewController: UIViewController, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = coursesList.dequeueReusableCell(withIdentifier: "Cell")
+        
+        let cellIdentifier = "CourseCell"
+        let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as! CourseTableViewCell
         let course = courses[indexPath.row]
-        cell!.textLabel!.text = course.value(forKey: "name") as? String
-        return cell!
+        let courseName = course.value(forKey: "name") as! String
+        let courseAddress = course.value(forKey: "address") as! String
+        let courseZipcode = course.value(forKey: "zipcode") as! String
+        let courseCity = course.value(forKey: "city") as! String
+        let courseCountry = course.value(forKey: "country") as! String
+        let courseDay = course.value(forKey: "day") as! String
+        let courseTime = course.value(forKey: "time") as! Date
+        let courseNotification = course.value(forKey: "notification") as! Bool
+        let courseAlarm = course.value(forKey: "alarm") as! Bool
+        cell.courseName?.text = courseName
+        cell.courseAddress?.text = courseAddress
+        cell.courseZipcode?.text = courseZipcode
+        cell.courseCity?.text = courseCity
+        cell.courseCountry?.text = courseCountry
+        cell.courseDay?.text = courseDay
+        let calendar = Calendar.current
+        let hour = calendar.component(.hour, from: courseTime)
+        let minutes = calendar.component(.minute, from: courseTime)
+        if(minutes<10){
+            if(hour<10){
+                cell.courseTime?.text = "0\(hour):0\(minutes)"
+            }else{
+                cell.courseTime?.text = "\(hour):0\(minutes)"
+            }
+        }else{
+            if(hour<10){
+                cell.courseTime?.text = "0\(hour):\(minutes)"
+            }else{
+                cell.courseTime?.text = "\(hour):\(minutes)"
+            }
+        }
+        if(courseNotification){
+            cell.courseNotification?.text = "Notification on"
+        }else{
+            cell.courseNotification?.text = "Notification off"
+        }
+        if(courseAlarm){
+            cell.courseAlarm?.text = "Alarm on"
+        }else{
+            cell.courseAlarm?.text = "Alarm off"
+        }
+        return cell
     }
 
 }
