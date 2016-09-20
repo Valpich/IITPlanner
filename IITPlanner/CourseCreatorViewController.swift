@@ -109,6 +109,9 @@ class CourseCreatorViewController: UIViewController,UIPickerViewDelegate, UIPick
             
             sender.text = cutString
         }
+        if((sender.text?.characters.count)! == 5){
+                cityTextField.becomeFirstResponder()
+        }
     }
     
     // The number of columns of data
