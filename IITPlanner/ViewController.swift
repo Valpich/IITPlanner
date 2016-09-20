@@ -60,7 +60,6 @@ class ViewController: UIViewController, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
         let cellIdentifier = "CourseCell"
         let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as! CourseTableViewCell
         let course = courses[indexPath.row]
@@ -84,15 +83,31 @@ class ViewController: UIViewController, UITableViewDataSource {
         let minutes = calendar.component(.minute, from: courseTime)
         if(minutes<10){
             if(hour<10){
-                cell.courseTime?.text = "0\(hour):0\(minutes)"
-            }else{
-                cell.courseTime?.text = "\(hour):0\(minutes)"
+                cell.courseTime?.text = "\(hour):0\(minutes) AM"
+            }
+            if(hour==0){
+                cell.courseTime?.text = "12:0\(minutes) AM"
+            }
+            if(hour>12){
+                let tmp = hour-12
+                cell.courseTime?.text = "\(tmp):0\(minutes) PM"
+            }
+            if(hour==12){
+                cell.courseTime?.text = "\(hour):0\(minutes) PM"
             }
         }else{
             if(hour<10){
-                cell.courseTime?.text = "0\(hour):\(minutes)"
-            }else{
-                cell.courseTime?.text = "\(hour):\(minutes)"
+                cell.courseTime?.text = "\(hour):\(minutes) AM"
+            }
+            if(hour==0){
+                cell.courseTime?.text = "12:\(minutes) AM"
+            }
+            if(hour>12){
+                let tmp = hour-12
+                cell.courseTime?.text = "\(tmp):\(minutes) PM"
+            }
+            if(hour==12){
+                cell.courseTime?.text = "\(hour):\(minutes) PM"
             }
         }
         if(courseNotification){

@@ -253,11 +253,11 @@
                                                 </subviews>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             </view>
-                                            <datePicker contentMode="scaleToFill" fixedFrame="YES" enabled="NO" selected="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="time" minuteInterval="5" translatesAutoresizingMaskIntoConstraints="NO" id="DzV-pT-Yw3">
+                                            <datePicker contentMode="scaleToFill" fixedFrame="YES" enabled="NO" selected="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="time" minuteInterval="5" useCurrentDate="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DzV-pT-Yw3">
                                                 <frame key="frameInset" minX="40" minY="88" height="45" maxX="40"/>
                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                                                <date key="date" timeIntervalSinceReferenceDate="495937372.40097803">
-                                                    <!--2016-09-19 00:22:52 +0000-->
+                                                <date key="date" timeIntervalSinceReferenceDate="495867600.40097803">
+                                                    <!--2016-09-18 05:00:00 +0000-->
                                                 </date>
                                             </datePicker>
                                             <pickerView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="y6v-Ec-FOY">

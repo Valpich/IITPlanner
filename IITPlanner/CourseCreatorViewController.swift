@@ -50,7 +50,7 @@ class CourseCreatorViewController: UIViewController,UIPickerViewDelegate, UIPick
         city = cityTextField.text
         country = countryTextField.text
         address = addressTextField.text
-        /*
+        
         print(dayValue!)
         print(dateTime!)
         print(isNotification!)
@@ -60,7 +60,7 @@ class CourseCreatorViewController: UIViewController,UIPickerViewDelegate, UIPick
         print(city!)
         print(address!)
         print(country!)
-        */
+        
         if(true){
             saveCourse(name: courseName!, address: address!, zipcode: zipcode!, city: city!, country: country!, day: dayValue!, time: dateTime!, alarm: isAlarm!, notification: isNotification!)
         }
