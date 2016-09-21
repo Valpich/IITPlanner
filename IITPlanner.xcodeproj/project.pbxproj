@@ -7,7 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		547E31D696CAFB92162D41E1 /* libPods-IITPlanner.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EC5498951ACDC973C0086B3C /* libPods-IITPlanner.a */; };
 		739C98E71D918C32005B6C6E /* CourseTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 739C98E61D918C32005B6C6E /* CourseTableViewCell.swift */; };
+		739EB5601D92129E009292A7 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 739EB55F1D92129E009292A7 /* MapViewController.swift */; };
 		73E6B0AC1D8E1B2000225920 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73E6B0AB1D8E1B2000225920 /* AppDelegate.swift */; };
 		73E6B0AE1D8E1B2000225920 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73E6B0AD1D8E1B2000225920 /* ViewController.swift */; };
 		73E6B0B11D8E1B2000225920 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 73E6B0AF1D8E1B2000225920 /* Main.storyboard */; };
@@ -29,7 +31,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		417DDA77F0D16D0141D98CDA /* Pods-IITPlanner.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IITPlanner.debug.xcconfig"; path = "Pods/Target Support Files/Pods-IITPlanner/Pods-IITPlanner.debug.xcconfig"; sourceTree = "<group>"; };
 		739C98E61D918C32005B6C6E /* CourseTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CourseTableViewCell.swift; sourceTree = "<group>"; };
+		739EB55F1D92129E009292A7 /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		73E6B0A81D8E1B2000225920 /* IITPlanner.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = IITPlanner.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		73E6B0AB1D8E1B2000225920 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		73E6B0AD1D8E1B2000225920 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -43,6 +47,8 @@
 		73E6B0CE1D8F37A600225920 /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
 		73E6B0FF1D8F68B600225920 /* CourseCreatorViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CourseCreatorViewController.swift; sourceTree = "<group>"; };
 		73E6B1011D8F7E8E00225920 /* IITPlanner.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = IITPlanner.entitlements; sourceTree = "<group>"; };
+		E203FEB1B0E67FE1E578F5DB /* Pods-IITPlanner.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IITPlanner.release.xcconfig"; path = "Pods/Target Support Files/Pods-IITPlanner/Pods-IITPlanner.release.xcconfig"; sourceTree = "<group>"; };
+		EC5498951ACDC973C0086B3C /* libPods-IITPlanner.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-IITPlanner.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -50,6 +56,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				547E31D696CAFB92162D41E1 /* libPods-IITPlanner.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -63,12 +70,23 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0FA105A2BD33AF6F6242308F /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				417DDA77F0D16D0141D98CDA /* Pods-IITPlanner.debug.xcconfig */,
+				E203FEB1B0E67FE1E578F5DB /* Pods-IITPlanner.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		73E6B09F1D8E1B2000225920 = {
 			isa = PBXGroup;
 			children = (
 				73E6B0AA1D8E1B2000225920 /* IITPlanner */,
 				73E6B0BF1D8E1B2000225920 /* IITPlannerTests */,
 				73E6B0A91D8E1B2000225920 /* Products */,
+				0FA105A2BD33AF6F6242308F /* Pods */,
+				927CC198EB48212A9511E068 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -88,6 +106,7 @@
 				73E6B0AB1D8E1B2000225920 /* AppDelegate.swift */,
 				73E6B0AD1D8E1B2000225920 /* ViewController.swift */,
 				73E6B0AF1D8E1B2000225920 /* Main.storyboard */,
+				739EB55F1D92129E009292A7 /* MapViewController.swift */,
 				739C98E61D918C32005B6C6E /* CourseTableViewCell.swift */,
 				73E6B0FF1D8F68B600225920 /* CourseCreatorViewController.swift */,
 				73E6B0CD1D8F37A600225920 /* Model.xcdatamodeld */,
@@ -107,6 +126,14 @@
 			path = IITPlannerTests;
 			sourceTree = "<group>";
 		};
+		927CC198EB48212A9511E068 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				EC5498951ACDC973C0086B3C /* libPods-IITPlanner.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -114,9 +141,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 73E6B0C51D8E1B2000225920 /* Build configuration list for PBXNativeTarget "IITPlanner" */;
 			buildPhases = (
+				F5BB21D7B376FA1D552ECDEE /* [CP] Check Pods Manifest.lock */,
 				73E6B0A41D8E1B2000225920 /* Sources */,
 				73E6B0A51D8E1B2000225920 /* Frameworks */,
 				73E6B0A61D8E1B2000225920 /* Resources */,
+				328302E0586974985A65CD0A /* [CP] Embed Pods Frameworks */,
+				22721621039E9014FBB87643 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -214,12 +244,61 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		22721621039E9014FBB87643 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-IITPlanner/Pods-IITPlanner-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		328302E0586974985A65CD0A /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-IITPlanner/Pods-IITPlanner-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		F5BB21D7B376FA1D552ECDEE /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		73E6B0A41D8E1B2000225920 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				73E6B1001D8F68B600225920 /* CourseCreatorViewController.swift in Sources */,
+				739EB5601D92129E009292A7 /* MapViewController.swift in Sources */,
 				73E6B0AE1D8E1B2000225920 /* ViewController.swift in Sources */,
 				73E6B0AC1D8E1B2000225920 /* AppDelegate.swift in Sources */,
 				73E6B0CF1D8F37A600225920 /* Model.xcdatamodeld in Sources */,
@@ -360,6 +439,7 @@
 		};
 		73E6B0C61D8E1B2000225920 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 417DDA77F0D16D0141D98CDA /* Pods-IITPlanner.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = IITPlanner/IITPlanner.entitlements;
@@ -375,6 +455,7 @@
 		};
 		73E6B0C71D8E1B2000225920 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = E203FEB1B0E67FE1E578F5DB /* Pods-IITPlanner.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = IITPlanner/IITPlanner.entitlements;
