@@ -39,6 +39,7 @@ class CourseCreatorViewController: UIViewController,UIPickerViewDelegate, UIPick
     @IBOutlet weak var hour: UIDatePicker!
     @IBOutlet weak var notification: UISwitch!
     @IBOutlet weak var alarm: UISwitch!
+    @IBOutlet weak var validateButton: UIButton!
     
     @IBAction func validatePressed(_ sender: UIButton) {
         dayValue = pickerData[dayOfTheWeek.selectedRow(inComponent: 0)]
@@ -50,7 +51,7 @@ class CourseCreatorViewController: UIViewController,UIPickerViewDelegate, UIPick
         city = cityTextField.text
         country = countryTextField.text
         address = addressTextField.text
-        
+        #if DEBUG
         print(dayValue!)
         print(dateTime!)
         print(isNotification!)
@@ -60,7 +61,7 @@ class CourseCreatorViewController: UIViewController,UIPickerViewDelegate, UIPick
         print(city!)
         print(address!)
         print(country!)
-        
+        #endif
         if(true){
             saveCourse(name: courseName!, address: address!, zipcode: zipcode!, city: city!, country: country!, day: dayValue!, time: dateTime!, alarm: isAlarm!, notification: isNotification!)
         }
@@ -89,25 +90,46 @@ class CourseCreatorViewController: UIViewController,UIPickerViewDelegate, UIPick
     @IBAction func endEditingCountry(_ sender: UITextField) {
         self.becomeFirstResponder()
     }
+
+    @IBAction func courseValueChanged(_ sender: UITextField) {
+        testFieldEmpty()
+    }
+    
+    @IBAction func countryValueChanged(_ sender: UITextField) {
+        testFieldEmpty()
+    }
+    
+    @IBAction func zipcodeValueChanged(_ sender: UITextField) {
+        testFieldEmpty()
+    }
+    
+    @IBAction func cityValueChanged(_ sender: UITextField) {
+        testFieldEmpty()
+    }
+    
+    @IBAction func addressValueChanged(_ sender: UITextField) {
+        testFieldEmpty()
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Connect data:
         self.dayOfTheWeek.delegate = self
         self.dayOfTheWeek.dataSource = self
+        validateButton.isUserInteractionEnabled = false
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+
     
     @IBAction func test(_ sender: UITextField) {
         if((sender.text?.characters.count)! > 5){
             var zip = ""
             zip = sender.text!
             let cutString = zip.substring(to: zip.index(zip.startIndex, offsetBy: 5))
-            
             sender.text = cutString
         }
         if((sender.text?.characters.count)! == 5){
@@ -137,8 +159,6 @@ class CourseCreatorViewController: UIViewController,UIPickerViewDelegate, UIPick
         dayValue = pickerData[row]
     }
     
-    @IBOutlet weak var test: UITextField!
-    
     func textFieldShouldReturn(_ textField: UITextField) -> Bool{
         /* if textField == self.text1 {
             self.text2.becomeFirstResponder()
@@ -148,6 +168,12 @@ class CourseCreatorViewController: UIViewController,UIPickerViewDelegate, UIPick
             self.text1.becomeFirstResponder()
         }*/
         return true
+    }
+    
+    func testFieldEmpty() {
+        if((addressTextField.text?.isEmpty == false) && (zipcodeTextField.text?.isEmpty == false) && (cityTextField.text?.isEmpty == false) && (countryTextField.text?.isEmpty == false) && (courseTextField.text?.isEmpty == false)){
+            validateButton.isUserInteractionEnabled = true
+        }
     }
     
     // MARK: - Persistance

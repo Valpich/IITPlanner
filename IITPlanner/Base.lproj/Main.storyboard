@@ -27,7 +27,7 @@
                                         <rect key="frame" x="0.0" y="92" width="375" height="180"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="uFo-tj-ytU" id="xbb-wq-KOr">
-                                            <frame key="frameInset" width="375" height="179"/>
+                                            <frame key="frameInset" width="375" height="179.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7Tk-b7-RbE">
@@ -167,6 +167,7 @@
                                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences" returnKeyType="continue" enablesReturnKeyAutomatically="YES"/>
                                                 <connections>
+                                                    <action selector="countryValueChanged:" destination="mwC-Eb-giD" eventType="editingChanged" id="qLk-Vr-jXd"/>
                                                     <action selector="endEditingCountry:" destination="mwC-Eb-giD" eventType="editingDidEndOnExit" id="5fm-lF-kgH"/>
                                                 </connections>
                                             </textField>
@@ -177,6 +178,7 @@
                                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences" returnKeyType="continue" enablesReturnKeyAutomatically="YES"/>
                                                 <connections>
+                                                    <action selector="cityValueChanged:" destination="mwC-Eb-giD" eventType="editingChanged" id="jY5-ti-5sJ"/>
                                                     <action selector="endEditingCity:" destination="mwC-Eb-giD" eventType="editingDidEndOnExit" id="9Uw-eD-hNh"/>
                                                     <outlet property="delegate" destination="AkL-nM-Vcl" id="2JZ-8E-ieD"/>
                                                 </connections>
@@ -189,7 +191,7 @@
                                                 <textInputTraits key="textInputTraits" keyboardType="numberPad" returnKeyType="continue" enablesReturnKeyAutomatically="YES"/>
                                                 <connections>
                                                     <action selector="endEditingZipcode:" destination="mwC-Eb-giD" eventType="editingDidEndOnExit" id="P5q-nY-92u"/>
-                                                    <action selector="test:" destination="mwC-Eb-giD" eventType="editingChanged" id="Hhi-eY-gRU"/>
+                                                    <action selector="zipcodeValueChanged:" destination="mwC-Eb-giD" eventType="editingChanged" id="Bba-YY-4I2"/>
                                                     <outlet property="delegate" destination="AkL-nM-Vcl" id="t3s-4Z-Isl"/>
                                                 </connections>
                                             </textField>
@@ -200,6 +202,7 @@
                                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences" returnKeyType="continue" enablesReturnKeyAutomatically="YES"/>
                                                 <connections>
+                                                    <action selector="addressValueChanged:" destination="mwC-Eb-giD" eventType="editingChanged" id="eJD-he-u8n"/>
                                                     <action selector="endEditingAddress:" destination="mwC-Eb-giD" eventType="editingDidEndOnExit" id="Ayu-H4-qsb"/>
                                                     <outlet property="delegate" destination="AkL-nM-Vcl" id="jjo-sw-pVq"/>
                                                 </connections>
@@ -277,6 +280,7 @@
                                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences" returnKeyType="continue" enablesReturnKeyAutomatically="YES"/>
                                                 <connections>
+                                                    <action selector="courseValueChanged:" destination="mwC-Eb-giD" eventType="editingChanged" id="eAv-HV-4lp"/>
                                                     <action selector="endEditingCourseName:" destination="mwC-Eb-giD" eventType="editingDidEndOnExit" id="SjY-9U-Jzv"/>
                                                 </connections>
                                             </textField>
@@ -308,6 +312,7 @@
                         <outlet property="dayOfTheWeek" destination="y6v-Ec-FOY" id="okS-bz-Ie5"/>
                         <outlet property="hour" destination="DzV-pT-Yw3" id="u5K-MP-DO0"/>
                         <outlet property="notification" destination="aAw-E9-Lm6" id="gwL-cP-98i"/>
+                        <outlet property="validateButton" destination="lfS-DP-jwx" id="RHP-1t-leB"/>
                         <outlet property="zipcodeTextField" destination="wjA-ym-3b9" id="YMa-gd-Lqk"/>
                     </connections>
                 </viewController>
@@ -319,7 +324,7 @@
                     </connections>
                 </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="2372" y="-566"/>
+            <point key="canvasLocation" x="2372" y="-566.26686656671666"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="Tqi-wv-fNv">
