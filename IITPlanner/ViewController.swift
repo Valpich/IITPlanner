@@ -21,7 +21,68 @@ class ViewController: UIViewController, UITableViewDataSource {
         title = "Your list of courses"
     }
 
-    @IBAction func unwindToMenu(segue: UIStoryboardSegue) {}
+    class PostForData {
+        // the completion closure signature is (String) -> ()
+        func forData(completion: @escaping (String) -> ()) {
+            if let url = URL(string: "https://maps.googleapis.com/maps/api/directions/json?origin=Toronto&destination=Montreal&mode=transit&key=AIzaSyCowB88aliJqJuGNEsUjInIXMCKPxA9VJs") {
+                var request = URLRequest(url: url)
+                request.httpMethod = "POST"
+                let postString : String = "uid=59"
+                request.httpBody = postString.data(using: String.Encoding.utf8)
+                let task = URLSession.shared.dataTask(with: request) {
+                    data, response, error in
+                    if let data = data, let jsonString = String(data: data, encoding: String.Encoding.utf8) , error == nil {
+                        completion(jsonString)
+                    } else {
+                        print("error=\(error!.localizedDescription)")
+                    }
+                }
+                task.resume()
+            }
+        }
+    }
+    
+    func parseJSON(data: Data){
+        var times = [String]()
+        
+        do {
+            let json = try JSONSerialization.jsonObject(with: data, options: .allowFragments) as! [String:AnyObject]
+            if let routes = json["routes"] as? [[String: AnyObject]] {
+                for route in routes {
+                    if let legs = route["legs"] as? [[String: AnyObject]] {
+                        for leg in legs {
+                            if let duration = leg["duration"] as? [String: AnyObject] {
+                                if let time = duration["text"] as? String {
+                                    times.append(time)
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        } catch {
+            print("error serializing JSON: \(error)")
+        }
+        
+        print(times) // Parsed time value !
+    }
+    
+    @IBAction func unwindToMenu(segue: UIStoryboardSegue) {
+        /*let url = URL(string: "https://maps.googleapis.com/maps/api/directions/json?origin=Toronto&destination=Montreal&mode=transit&key=AIzaSyCowB88aliJqJuGNEsUjInIXMCKPxA9VJs")
+        var  tmpString = ""
+        let task = URLSession.shared.dataTask(with: url! as URL) {(data, response, error) in
+            print(NSString(data: data!, encoding: String.Encoding.utf8.rawValue))
+        }
+        task.data
+        task.resume()*/
+        let pfd = PostForData()
+        
+        // you call the method with a trailing closure
+        pfd.forData {
+            jsonString in
+            self.parseJSON(data: jsonString.data(using: .utf8)!)
+        }
+    }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
