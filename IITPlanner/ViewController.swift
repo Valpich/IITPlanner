@@ -8,18 +8,36 @@
 
 import UIKit
 import CoreData
+import GoogleMaps
 
 
-class ViewController: UIViewController, UITableViewDataSource {
+class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, CLLocationManagerDelegate {
 
     var courses = [NSManagedObject]()
-    static let myNotification = Notification.Name("myNotification")
+   //static let myNotification = Notification.Name("myNotification")
+    let locationManager = CLLocationManager()
 
     @IBOutlet weak var coursesList: UITableView!
+    
+    var done = false
+    var message = ""
+    var locValue:CLLocationCoordinate2D = CLLocationCoordinate2D()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "Your list of courses"
+        coursesList.delegate = self
+        // Ask for Authorisation from the User.
+        self.locationManager.requestAlwaysAuthorization()
+        
+        // For use in foreground
+        self.locationManager.requestWhenInUseAuthorization()
+        
+        if CLLocationManager.locationServicesEnabled() {
+            locationManager.delegate = self
+            locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
+            locationManager.startUpdatingLocation()
+        }
     }
 
     class PostForData {
@@ -63,7 +81,9 @@ class ViewController: UIViewController, UITableViewDataSource {
         } catch {
             print("error serializing JSON: \(error)")
         }
-        return times[0]
+        message =  times[0]
+        done = true
+        return message
     }
     
     @IBAction func unwindToMenu(segue: UIStoryboardSegue) {
@@ -75,7 +95,7 @@ class ViewController: UIViewController, UITableViewDataSource {
         // you call the method with a trailing closure
         pfd.forData(origin: origin.replacingOccurrences(of: " ", with: "%20"),destination: destination.replacingOccurrences(of: " ", with: "%20")) {
             jsonString in
-            result = self.parseJSON(data: jsonString.data(using: .utf8)!)
+            result.append(self.parseJSON(data: jsonString.data(using: .utf8)!))
         }
         return result
     }
@@ -105,7 +125,7 @@ class ViewController: UIViewController, UITableViewDataSource {
             print("Could not fetch \(error), \(error.userInfo)")
         }
         coursesList.reloadData()
-                NotificationCenter.default.post(name: ViewController.myNotification, object: self)
+        //NotificationCenter.default.post(name: ViewController.myNotification, object: self)
     }
     
     override func didReceiveMemoryWarning() {
@@ -115,6 +135,39 @@ class ViewController: UIViewController, UITableViewDataSource {
     // MARK: UITableViewDataSource
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return courses.count
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        locValue = manager.location!.coordinate
+    }
+    
+    func tableView(_ tableView:
+        UITableView,
+                        didSelectRowAt indexPath: IndexPath) {
+        let origin = String(locValue.latitude) + " " + String(locValue.longitude)
+        var destination = courses[indexPath.item].value(forKey: "address") as! String
+        destination.append(" ")
+        destination.append(courses[indexPath.item].value(forKey: "zipcode") as! String)
+        destination.append(" ")
+        destination.append(courses[indexPath.item].value(forKey: "city") as! String )
+        destination.append(" ")
+        destination.append(courses[indexPath.item].value(forKey: "country") as! String)
+        message = getDuration(origin: origin,destination: destination)
+        while(done == false){
+            print(2)
+        }
+        print(locValue)
+        print(message)
+        done = false
+
+        if indexPath.item == 0 {
+            let alertController = UIAlertController(title: "Estimated duration", message: message, preferredStyle: .alert)
+            let cancelAction = UIAlertAction(title: "Dismiss", style: .cancel) { (_) in }
+            alertController.addAction(cancelAction)
+            self.present(alertController, animated: true) {}
+          //  self.dismiss(animated: true, completion: nil)
+        }
+        
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
