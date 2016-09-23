@@ -13,7 +13,8 @@ import CoreData
 class ViewController: UIViewController, UITableViewDataSource {
 
     var courses = [NSManagedObject]()
-    
+    static let myNotification = Notification.Name("myNotification")
+
     @IBOutlet weak var coursesList: UITableView!
     
     override func viewDidLoad() {
@@ -23,8 +24,8 @@ class ViewController: UIViewController, UITableViewDataSource {
 
     class PostForData {
         // the completion closure signature is (String) -> ()
-        func forData(completion: @escaping (String) -> ()) {
-            if let url = URL(string: "https://maps.googleapis.com/maps/api/directions/json?origin=Toronto&destination=Montreal&mode=transit&key=AIzaSyCowB88aliJqJuGNEsUjInIXMCKPxA9VJs") {
+        func forData(origin: String, destination: String, completion: @escaping (String) -> ()) {
+            if let url = URL(string: "https://maps.googleapis.com/maps/api/directions/json?origin=\(origin)&destination=\(destination)&mode=transit&key=AIzaSyCowB88aliJqJuGNEsUjInIXMCKPxA9VJs") {
                 var request = URLRequest(url: url)
                 request.httpMethod = "POST"
                 let postString : String = "uid=59"
@@ -42,9 +43,8 @@ class ViewController: UIViewController, UITableViewDataSource {
         }
     }
     
-    func parseJSON(data: Data){
+    func parseJSON(data: Data) -> String{
         var times = [String]()
-        
         do {
             let json = try JSONSerialization.jsonObject(with: data, options: .allowFragments) as! [String:AnyObject]
             if let routes = json["routes"] as? [[String: AnyObject]] {
@@ -63,25 +63,21 @@ class ViewController: UIViewController, UITableViewDataSource {
         } catch {
             print("error serializing JSON: \(error)")
         }
-        
-        print(times) // Parsed time value !
+        return times[0]
     }
     
     @IBAction func unwindToMenu(segue: UIStoryboardSegue) {
-        /*let url = URL(string: "https://maps.googleapis.com/maps/api/directions/json?origin=Toronto&destination=Montreal&mode=transit&key=AIzaSyCowB88aliJqJuGNEsUjInIXMCKPxA9VJs")
-        var  tmpString = ""
-        let task = URLSession.shared.dataTask(with: url! as URL) {(data, response, error) in
-            print(NSString(data: data!, encoding: String.Encoding.utf8.rawValue))
-        }
-        task.data
-        task.resume()*/
+    }
+    
+    func getDuration(origin: String, destination: String) -> String{
         let pfd = PostForData()
-        
+        var result = ""
         // you call the method with a trailing closure
-        pfd.forData {
+        pfd.forData(origin: origin.replacingOccurrences(of: " ", with: "%20"),destination: destination.replacingOccurrences(of: " ", with: "%20")) {
             jsonString in
-            self.parseJSON(data: jsonString.data(using: .utf8)!)
+            result = self.parseJSON(data: jsonString.data(using: .utf8)!)
         }
+        return result
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -109,6 +105,7 @@ class ViewController: UIViewController, UITableViewDataSource {
             print("Could not fetch \(error), \(error.userInfo)")
         }
         coursesList.reloadData()
+                NotificationCenter.default.post(name: ViewController.myNotification, object: self)
     }
     
     override func didReceiveMemoryWarning() {
