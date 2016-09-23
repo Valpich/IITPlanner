@@ -19,8 +19,10 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
 
     @IBOutlet weak var coursesList: UITableView!
     
-    var done = false
     var message = ""
+    var departureTime = ""
+    var arrivalTime = ""
+
     var locValue:CLLocationCoordinate2D = CLLocationCoordinate2D()
     
     override func viewDidLoad() {
@@ -36,7 +38,6 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         if CLLocationManager.locationServicesEnabled() {
             locationManager.delegate = self
             locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
-            locationManager.startUpdatingLocation()
         }
     }
 
@@ -62,7 +63,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     }
     
     func parseJSON(data: Data) -> String{
-        var times = [String]()
+        var times = [String](arrayLiteral: "","","")
         do {
             let json = try JSONSerialization.jsonObject(with: data, options: .allowFragments) as! [String:AnyObject]
             if let routes = json["routes"] as? [[String: AnyObject]] {
@@ -71,7 +72,17 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
                         for leg in legs {
                             if let duration = leg["duration"] as? [String: AnyObject] {
                                 if let time = duration["text"] as? String {
-                                    times.append(time)
+                                    times[0] = time
+                                }
+                            }
+                            if let departureTime = leg["departure_time"] as? [String: AnyObject] {
+                                if let departure = departureTime["text"] as? String {
+                                    times[1] = departure
+                                }
+                            }
+                            if let arrivalTime = leg["arrival_time"] as? [String: AnyObject] {
+                                if let arrival = arrivalTime["text"] as? String {
+                                    times[2] = arrival
                                 }
                             }
                         }
@@ -82,7 +93,8 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             print("error serializing JSON: \(error)")
         }
         message =  times[0]
-        done = true
+        departureTime =  times[1]
+        arrivalTime =  times[2]
         return message
     }
     
@@ -144,28 +156,33 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     func tableView(_ tableView:
         UITableView,
                         didSelectRowAt indexPath: IndexPath) {
-        let origin = String(locValue.latitude) + " " + String(locValue.longitude)
-        var destination = courses[indexPath.item].value(forKey: "address") as! String
-        destination.append(" ")
-        destination.append(courses[indexPath.item].value(forKey: "zipcode") as! String)
-        destination.append(" ")
-        destination.append(courses[indexPath.item].value(forKey: "city") as! String )
-        destination.append(" ")
-        destination.append(courses[indexPath.item].value(forKey: "country") as! String)
-        message = getDuration(origin: origin,destination: destination)
-        while(done == false){
-            print(2)
+        if CLLocationManager.locationServicesEnabled() {
+            locationManager.startUpdatingLocation()
         }
-        print(locValue)
-        print(message)
-        done = false
-
-        if indexPath.item == 0 {
-            let alertController = UIAlertController(title: "Estimated duration", message: message, preferredStyle: .alert)
-            let cancelAction = UIAlertAction(title: "Dismiss", style: .cancel) { (_) in }
-            alertController.addAction(cancelAction)
-            self.present(alertController, animated: true) {}
-          //  self.dismiss(animated: true, completion: nil)
+        let time = DispatchTime.now() + 0.5
+        DispatchQueue.main.asyncAfter(deadline: time){
+            let origin = String(self.locValue.latitude) + " " + String(self.locValue.longitude)
+            var destination = self.courses[indexPath.item].value(forKey: "address") as! String
+            destination.append(" ")
+            destination.append(self.courses[indexPath.item].value(forKey: "zipcode") as! String)
+            destination.append(" ")
+            destination.append(self.courses[indexPath.item].value(forKey: "city") as! String )
+            destination.append(" ")
+            destination.append(self.courses[indexPath.item].value(forKey: "country") as! String)
+            self.message = self.getDuration(origin: origin, destination: destination)
+            //Two is the number of seconds to delay
+            let when = DispatchTime.now() + 1
+            DispatchQueue.main.asyncAfter(deadline: when){
+                let msg = "Duration: " + self.message + "\r\n" + "Departure time: " + self.departureTime + "\r\n" + "Arrival time: " + self.arrivalTime
+                let alertController = UIAlertController(title: "Estimated duration", message: msg, preferredStyle: .alert)
+                let cancelAction = UIAlertAction(title: "Dismiss", style: .cancel) { (_) in }
+                alertController.addAction(cancelAction)
+                self.present(alertController, animated: true) {}
+                //  self.dismiss(animated: true, completion: nil)
+            }
+        }
+        if CLLocationManager.locationServicesEnabled() {
+            locationManager.stopUpdatingLocation()
         }
         
     }
