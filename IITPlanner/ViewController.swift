@@ -12,17 +12,17 @@ import GoogleMaps
 
 
 class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, CLLocationManagerDelegate {
-
+    
     var courses = [NSManagedObject]()
-   //static let myNotification = Notification.Name("myNotification")
+    //static let myNotification = Notification.Name("myNotification")
     let locationManager = CLLocationManager()
-
+    
     @IBOutlet weak var coursesList: UITableView!
     
     var message = ""
     var departureTime = ""
     var arrivalTime = ""
-
+    
     var locValue:CLLocationCoordinate2D = CLLocationCoordinate2D()
     
     override func viewDidLoad() {
@@ -39,8 +39,10 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             locationManager.delegate = self
             locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
         }
+        navigationItem.leftBarButtonItem = editButtonItem
+        
     }
-
+    
     class PostForData {
         // the completion closure signature is (String) -> ()
         func forData(origin: String, destination: String, completion: @escaping (String) -> ()) {
@@ -62,11 +64,21 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         }
     }
     
+    override func shouldPerformSegue(withIdentifier: String?, sender: Any?) -> Bool {
+        if let ident = withIdentifier {
+            if ident == "ShowDetail" {
+                if(navigationItem.leftBarButtonItem?.title == "Edit"){
+                    return false
+                }
+            }
+        }
+        return true
+    }
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
         if segue.identifier == "ShowDetail" {
             let courseCreatorViewController = segue.destination as! CourseCreatorViewController
-            
             // Get the cell that generated this segue.
             if let selectedCourseCell = sender as? CourseTableViewCell {
                 let indexPath = coursesList.indexPath(for: selectedCourseCell)!
@@ -172,36 +184,37 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     func tableView(_ tableView:
         UITableView,
-                        didSelectRowAt indexPath: IndexPath) {
-        if CLLocationManager.locationServicesEnabled() {
-            locationManager.startUpdatingLocation()
-        }
-        let time = DispatchTime.now() + 0.5
-        DispatchQueue.main.asyncAfter(deadline: time){
-            let origin = String(self.locValue.latitude) + " " + String(self.locValue.longitude)
-            var destination = self.courses[indexPath.item].value(forKey: "address") as! String
-            destination.append(" ")
-            destination.append(self.courses[indexPath.item].value(forKey: "zipcode") as! String)
-            destination.append(" ")
-            destination.append(self.courses[indexPath.item].value(forKey: "city") as! String )
-            destination.append(" ")
-            destination.append(self.courses[indexPath.item].value(forKey: "country") as! String)
-            self.message = self.getDuration(origin: origin, destination: destination)
-            //Two is the number of seconds to delay
-            let when = DispatchTime.now() + 1
-            DispatchQueue.main.asyncAfter(deadline: when){
-                let msg = "Duration: " + self.message + "\r\n" + "Departure time: " + self.departureTime + "\r\n" + "Arrival time: " + self.arrivalTime
-                let alertController = UIAlertController(title: "Estimated duration", message: msg, preferredStyle: .alert)
-                let cancelAction = UIAlertAction(title: "Dismiss", style: .cancel) { (_) in }
-                alertController.addAction(cancelAction)
-                self.present(alertController, animated: true) {}
-                //  self.dismiss(animated: true, completion: nil)
+                   didSelectRowAt indexPath: IndexPath) {
+        if(navigationItem.leftBarButtonItem?.title == "Edit"){
+            if CLLocationManager.locationServicesEnabled() {
+                locationManager.startUpdatingLocation()
+            }
+            let time = DispatchTime.now() + 0.5
+            DispatchQueue.main.asyncAfter(deadline: time){
+                let origin = String(self.locValue.latitude) + " " + String(self.locValue.longitude)
+                var destination = self.courses[indexPath.item].value(forKey: "address") as! String
+                destination.append(" ")
+                destination.append(self.courses[indexPath.item].value(forKey: "zipcode") as! String)
+                destination.append(" ")
+                destination.append(self.courses[indexPath.item].value(forKey: "city") as! String )
+                destination.append(" ")
+                destination.append(self.courses[indexPath.item].value(forKey: "country") as! String)
+                self.message = self.getDuration(origin: origin, destination: destination)
+                //Two is the number of seconds to delay
+                let when = DispatchTime.now() + 1
+                DispatchQueue.main.asyncAfter(deadline: when){
+                    let msg = "Duration: " + self.message + "\r\n" + "Departure time: " + self.departureTime + "\r\n" + "Arrival time: " + self.arrivalTime
+                    let alertController = UIAlertController(title: "Estimated duration", message: msg, preferredStyle: .alert)
+                    let cancelAction = UIAlertAction(title: "Dismiss", style: .cancel) { (_) in }
+                    alertController.addAction(cancelAction)
+                    self.present(alertController, animated: true) {}
+                    //  self.dismiss(animated: true, completion: nil)
+                }
+            }
+            if CLLocationManager.locationServicesEnabled() {
+                locationManager.stopUpdatingLocation()
             }
         }
-        if CLLocationManager.locationServicesEnabled() {
-            locationManager.stopUpdatingLocation()
-        }
-        
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -267,6 +280,23 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         }
         return cell
     }
-
+    
+    // Support editing the table view.
+    func tableView (_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            // Delete the row from the data source
+            let appDelegate = UIApplication.shared.delegate as! AppDelegate
+            let managedContext = appDelegate.managedObjectContext
+            managedContext.delete(courses[indexPath.row] as NSManagedObject)
+            courses.remove(at: indexPath.row)
+            do {
+                try managedContext.save()
+                coursesList.deleteRows(at: [indexPath as IndexPath], with: .fade)
+            } catch let error as NSError  {
+                print("Could not save \(error), \(error.userInfo)")
+            }
+        }
+    }
+    
 }
 
