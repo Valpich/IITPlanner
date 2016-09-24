@@ -13,13 +13,23 @@ class Course: NSObject {
     // MARK: Properties
     
     var name: String
-    var date: [NSDate]?
+    var address: String
+    var zipcode: String
+    var city: String
+    var country: String
+    var time: Date
+    var day: String
     var notification: Bool
     var alarm: Bool
     
-    init?(name: String, date: [NSDate], notification: Bool, alarm: Bool) {
+    init?(name: String, address: String, zipcode: String, city: String, country: String, time: Date, day: String, notification: Bool, alarm: Bool) {
         self.name = name
-        self.date = date
+        self.address = address
+        self.zipcode = zipcode
+        self.city = city
+        self.country = country
+        self.time = time
+        self.day = day
         self.notification = notification
         self.alarm = alarm
         if self.name.isEmpty {
@@ -27,11 +37,4 @@ class Course: NSObject {
         }
     }
     
-    // MARK: Types
-    /*
-    struct PropertyKey {
-        static let nameKey = "name"
-        static let photoKey = "photo"
-        static let ratingKey = "rating"
-    }*/
 }

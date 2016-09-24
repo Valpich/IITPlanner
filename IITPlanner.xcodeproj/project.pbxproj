@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		547E31D696CAFB92162D41E1 /* libPods-IITPlanner.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EC5498951ACDC973C0086B3C /* libPods-IITPlanner.a */; };
+		730661C11D958DE50000C065 /* Course.swift in Sources */ = {isa = PBXBuildFile; fileRef = 730661C01D958DE50000C065 /* Course.swift */; };
 		739C98E71D918C32005B6C6E /* CourseTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 739C98E61D918C32005B6C6E /* CourseTableViewCell.swift */; };
 		739EB5601D92129E009292A7 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 739EB55F1D92129E009292A7 /* MapViewController.swift */; };
 		73E6B0AC1D8E1B2000225920 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73E6B0AB1D8E1B2000225920 /* AppDelegate.swift */; };
@@ -32,6 +33,7 @@
 
 /* Begin PBXFileReference section */
 		417DDA77F0D16D0141D98CDA /* Pods-IITPlanner.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IITPlanner.debug.xcconfig"; path = "Pods/Target Support Files/Pods-IITPlanner/Pods-IITPlanner.debug.xcconfig"; sourceTree = "<group>"; };
+		730661C01D958DE50000C065 /* Course.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Course.swift; sourceTree = "<group>"; };
 		739C98E61D918C32005B6C6E /* CourseTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CourseTableViewCell.swift; sourceTree = "<group>"; };
 		739EB55F1D92129E009292A7 /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		73E6B0A81D8E1B2000225920 /* IITPlanner.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = IITPlanner.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -102,6 +104,7 @@
 		73E6B0AA1D8E1B2000225920 /* IITPlanner */ = {
 			isa = PBXGroup;
 			children = (
+				730661C01D958DE50000C065 /* Course.swift */,
 				73E6B1011D8F7E8E00225920 /* IITPlanner.entitlements */,
 				73E6B0AB1D8E1B2000225920 /* AppDelegate.swift */,
 				73E6B0AD1D8E1B2000225920 /* ViewController.swift */,
@@ -298,6 +301,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				73E6B1001D8F68B600225920 /* CourseCreatorViewController.swift in Sources */,
+				730661C11D958DE50000C065 /* Course.swift in Sources */,
 				739EB5601D92129E009292A7 /* MapViewController.swift in Sources */,
 				73E6B0AE1D8E1B2000225920 /* ViewController.swift in Sources */,
 				73E6B0AC1D8E1B2000225920 /* AppDelegate.swift in Sources */,

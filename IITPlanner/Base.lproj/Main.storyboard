@@ -27,7 +27,7 @@
                                         <rect key="frame" x="0.0" y="92" width="375" height="180"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="uFo-tj-ytU" id="xbb-wq-KOr">
-                                            <frame key="frameInset" width="375" height="179.5"/>
+                                            <frame key="frameInset" width="375" height="179"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7Tk-b7-RbE">
@@ -105,6 +105,7 @@
                                             <outlet property="courseNotification" destination="DUP-6f-XPI" id="UWo-fI-24c"/>
                                             <outlet property="courseTime" destination="E4T-1s-bg9" id="vtx-b1-Fag"/>
                                             <outlet property="courseZipcode" destination="2cV-6M-7B3" id="Ydv-gX-ODF"/>
+                                            <segue destination="mwC-Eb-giD" kind="show" identifier="ShowDetail" id="gah-4I-50w"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -118,7 +119,7 @@
                     <navigationItem key="navigationItem" id="HPT-nA-Tzf">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="8gL-Xy-foo">
                             <connections>
-                                <segue destination="mwC-Eb-giD" kind="show" id="M9p-Vp-YeP"/>
+                                <segue destination="mwC-Eb-giD" kind="show" identifier="AddCourse" id="M9p-Vp-YeP"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -366,4 +367,7 @@
             <point key="canvasLocation" x="133.59999999999999" y="-543.77811094452773"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="M9p-Vp-YeP"/>
+    </inferredMetricsTieBreakers>
 </document>

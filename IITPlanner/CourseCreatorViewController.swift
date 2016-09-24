@@ -27,9 +27,11 @@ class CourseCreatorViewController: UIViewController,UIPickerViewDelegate, UIPick
     var zipcode : String?
     var city : String?
     var country : String?
+    var update = false
     
     var courses = [NSManagedObject]()
-
+    var courseUpdate : NSManagedObject?
+    
     @IBOutlet weak var addressTextField: UITextField!
     @IBOutlet weak var zipcodeTextField: UITextField!
     @IBOutlet weak var cityTextField: UITextField!
@@ -68,26 +70,32 @@ class CourseCreatorViewController: UIViewController,UIPickerViewDelegate, UIPick
     }
 
     @IBAction func tapGestureRecognizer(_ sender: UITapGestureRecognizer) {
+        testFieldEmpty()
         view.endEditing(true)
     }
     
     @IBAction func endEditingCourseName(_ sender: UITextField) {
+        testFieldEmpty()
         addressTextField.becomeFirstResponder()
     }
 
     @IBAction func endEditingAddress(_ sender: UITextField) {
+        testFieldEmpty()
         zipcodeTextField.becomeFirstResponder()
     }
     
     @IBAction func endEditingZipcode(_ sender: UITextField) {
+        testFieldEmpty()
         cityTextField.becomeFirstResponder()
     }
     
     @IBAction func endEditingCity(_ sender: UITextField) {
+        testFieldEmpty()
         countryTextField.becomeFirstResponder()
     }
 
     @IBAction func endEditingCountry(_ sender: UITextField) {
+        testFieldEmpty()
         self.becomeFirstResponder()
     }
 
@@ -126,8 +134,27 @@ class CourseCreatorViewController: UIViewController,UIPickerViewDelegate, UIPick
         self.dayOfTheWeek.delegate = self
         self.dayOfTheWeek.dataSource = self
         validateButton.isUserInteractionEnabled = false
+        if let courseUpdate = courseUpdate {
+            courseTextField.text = courseUpdate.value(forKey: "name") as? String
+            addressTextField.text = courseUpdate.value(forKey: "address") as? String
+            zipcodeTextField.text = courseUpdate.value(forKey: "zipcode") as? String
+            cityTextField.text = courseUpdate.value(forKey: "city") as? String
+            countryTextField.text = courseUpdate.value(forKey: "country") as? String
+            var row = 0
+            for i in 0...pickerData.count-1 {
+                if (pickerData[i] == courseUpdate.value(forKey: "day") as! String){
+                    row = i
+                }
+            }
+            dayOfTheWeek.selectRow(row, inComponent: 0, animated: false)
+            hour.date = courseUpdate.value(forKey: "time") as! Date
+            notification.isOn = courseUpdate.value(forKey: "notification") as! Bool
+            alarm.isOn = courseUpdate.value(forKey: "alarm") as! Bool
+            update = true
+        }
+        testFieldEmpty()
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -156,13 +183,6 @@ class CourseCreatorViewController: UIViewController,UIPickerViewDelegate, UIPick
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool{
-        /* if textField == self.text1 {
-            self.text2.becomeFirstResponder()
-        }else if textField == self.text2{
-            self.text3.becomeFirstResponder()
-        }else{
-            self.text1.becomeFirstResponder()
-        }*/
         return true
     }
     
@@ -178,21 +198,38 @@ class CourseCreatorViewController: UIViewController,UIPickerViewDelegate, UIPick
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         let managedContext = appDelegate.managedObjectContext
         let entity =  NSEntityDescription.entity(forEntityName: "Course", in:managedContext)
-        let course = NSManagedObject(entity: entity!, insertInto: managedContext)
-        course.setValue(name, forKey: "name")
-        course.setValue(address, forKey: "address")
-        course.setValue(zipcode, forKey: "zipcode")
-        course.setValue(city, forKey: "city")
-        course.setValue(country, forKey: "country")
-        course.setValue(day, forKey: "day")
-        course.setValue(time, forKey: "time")
-        course.setValue(alarm, forKey: "alarm")
-        course.setValue(notification, forKey: "notification")
-        do {
-            try managedContext.save()
-            courses.append(course)
-        } catch let error as NSError  {
-            print("Could not save \(error), \(error.userInfo)")
+        if( update == false){
+            let course = NSManagedObject(entity: entity!, insertInto: managedContext)
+            course.setValue(name, forKey: "name")
+            course.setValue(address, forKey: "address")
+            course.setValue(zipcode, forKey: "zipcode")
+            course.setValue(city, forKey: "city")
+            course.setValue(country, forKey: "country")
+            course.setValue(day, forKey: "day")
+            course.setValue(time, forKey: "time")
+            course.setValue(alarm, forKey: "alarm")
+            course.setValue(notification, forKey: "notification")
+            do {
+                try managedContext.save()
+                courses.append(course)
+            } catch let error as NSError  {
+                print("Could not save \(error), \(error.userInfo)")
+            }
+        }else{
+            courseUpdate?.setValue(name, forKey: "name")
+            courseUpdate?.setValue(address, forKey: "address")
+            courseUpdate?.setValue(zipcode, forKey: "zipcode")
+            courseUpdate?.setValue(city, forKey: "city")
+            courseUpdate?.setValue(country, forKey: "country")
+            courseUpdate?.setValue(day, forKey: "day")
+            courseUpdate?.setValue(time, forKey: "time")
+            courseUpdate?.setValue(alarm, forKey: "alarm")
+            courseUpdate?.setValue(notification, forKey: "notification")
+            do {
+                try managedContext.save()
+            } catch let error as NSError  {
+                print("Could not save \(error), \(error.userInfo)")
+            }
         }
     }
     

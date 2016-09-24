@@ -62,6 +62,23 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         }
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+        if segue.identifier == "ShowDetail" {
+            let courseCreatorViewController = segue.destination as! CourseCreatorViewController
+            
+            // Get the cell that generated this segue.
+            if let selectedCourseCell = sender as? CourseTableViewCell {
+                let indexPath = coursesList.indexPath(for: selectedCourseCell)!
+                let selectedCourse = courses[indexPath.row]
+                courseCreatorViewController.courseUpdate = selectedCourse
+            }
+        }
+        else if segue.identifier == "AddCourse" {
+            print("Adding new course.")
+        }
+    }
+    
     func parseJSON(data: Data) -> String{
         var times = [String](arrayLiteral: "","","")
         do {
