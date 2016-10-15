@@ -256,11 +256,10 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
                 destination.append(self.courses[indexPath.item].value(forKey: "city") as! String )
                 destination.append(" ")
                 destination.append(self.courses[indexPath.item].value(forKey: "country") as! String)
+                let time = self.courses[indexPath.item].value(forKey: "time") as! Date
+                let day = self.courses[indexPath.item].value(forKey: "day") as! String
+                let timeInterval = self.getNextTime(day: day, time: time)
                 self.message = self.getDuration(origin: origin, destination: destination)
-                var time = self.courses[indexPath.item].value(forKey: "time") as! Date
-                var day = self.courses[indexPath.item].value(forKey: "day") as! String
-                var date = Date()
-                print(date.timeIntervalSince1970)
                 //One is the number of seconds to delay
                 let when = DispatchTime.now() + 2
                 DispatchQueue.main.asyncAfter(deadline: when){
@@ -364,5 +363,56 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         }
     }
     
+    func getDayOfWeek(today:String) -> Int?{
+        let formatter  = DateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd"
+        if let todayDate = formatter.date(from: today) {
+            let myCalendar = Calendar(identifier: .gregorian)
+            let weekDay = myCalendar.component(.weekday, from: todayDate)
+            return weekDay
+        } else {
+            return nil
+        }
+    }
+    
+    func dayOfTheWeekToInt(dayOfTheWeek:String)-> Int{
+        switch dayOfTheWeek {
+        case "Sunday":
+            return 1;
+        case "Monday":
+            return 2;
+        case "Tuesday":
+            return 3;
+        case "Wednesday":
+            return 4;
+        case "Thursday":
+            return 5;
+        case "Friday":
+            return 6;
+        case "Saturday":
+            return 7;
+        default:
+            return 0;
+        }
+    }
+    
+    func getNextTime(day:String, time:Date) -> TimeInterval?
+    {
+        let date = Date()
+        let calendar = Calendar.current
+        
+        let year = calendar.component(.year, from: date)
+        let month = calendar.component(.month, from: date)
+        let currentDay = calendar.component(.day, from: date)
+        
+        print(year)
+        print(month)
+        print(day)
+        print(date.timeIntervalSince1970)
+        let weekday = self.getDayOfWeek(today: "\(year)-\(month)-\(currentDay)")
+        print(weekday) // 4 = Wednesday
+        print(self.dayOfTheWeekToInt(dayOfTheWeek: day))
+        return nil
+    }
 }
 
