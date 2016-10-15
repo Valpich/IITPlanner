@@ -23,6 +23,10 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     var departureTime = ""
     var arrivalTime = ""
     
+    var messageArrivalBased = ""
+    var departureTimeArrivalBased = ""
+    var arrivalTimeArrivalBased = ""
+    
     var locValue:CLLocationCoordinate2D = CLLocationCoordinate2D()
     
     override func viewDidLoad() {
@@ -62,8 +66,8 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
                 task.resume()
             }
         }
-        func forDataArrival(arrivalTime: String, origin: String, destination: String, completion: @escaping (String) -> ()) {
-            if let url = URL(string: "https://maps.googleapis.com/maps/api/directions/json?origin=\(origin)&destination=\(destination)&mode=transit&key=AIzaSyCowB88aliJqJuGNEsUjInIXMCKPxA9VJs") {
+        func forDataArrivalBased(arrivalTime: String, origin: String, destination: String, completion: @escaping (String) -> ()) {
+            if let url = URL(string: "https://maps.googleapis.com/maps/api/directions/json?origin=\(origin)&destination=\(destination)&arrival_time=\(arrivalTime)&mode=transit&key=AIzaSyCowB88aliJqJuGNEsUjInIXMCKPxA9VJs") {
                 var request = URLRequest(url: url)
                 request.httpMethod = "POST"
                 let postString : String = "uid=59"
@@ -144,6 +148,42 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         return message
     }
     
+    func parseJSONArrivalBased(data: Data) -> String{
+        var times = [String](arrayLiteral: "","","")
+        do {
+            let json = try JSONSerialization.jsonObject(with: data, options: .allowFragments) as! [String:AnyObject]
+            if let routes = json["routes"] as? [[String: AnyObject]] {
+                for route in routes {
+                    if let legs = route["legs"] as? [[String: AnyObject]] {
+                        for leg in legs {
+                            if let duration = leg["duration"] as? [String: AnyObject] {
+                                if let time = duration["text"] as? String {
+                                    times[0] = time
+                                }
+                            }
+                            if let departureTime = leg["departure_time"] as? [String: AnyObject] {
+                                if let departure = departureTime["text"] as? String {
+                                    times[1] = departure
+                                }
+                            }
+                            if let arrivalTime = leg["arrival_time"] as? [String: AnyObject] {
+                                if let arrival = arrivalTime["text"] as? String {
+                                    times[2] = arrival
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        } catch {
+            print("error serializing JSON: \(error)")
+        }
+        messageArrivalBased =  times[0]
+        departureTimeArrivalBased =  times[1]
+        arrivalTimeArrivalBased =  times[2]
+        return messageArrivalBased
+    }
+    
     @IBAction func unwindToMenu(segue: UIStoryboardSegue) {
     }
     
@@ -217,10 +257,19 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
                 destination.append(" ")
                 destination.append(self.courses[indexPath.item].value(forKey: "country") as! String)
                 self.message = self.getDuration(origin: origin, destination: destination)
-                //Two is the number of seconds to delay
-                let when = DispatchTime.now() + 1
+                var time = self.courses[indexPath.item].value(forKey: "time") as! Date
+                var day = self.courses[indexPath.item].value(forKey: "day") as! String
+                var date = Date()
+                print(date.timeIntervalSince1970)
+                //One is the number of seconds to delay
+                let when = DispatchTime.now() + 2
                 DispatchQueue.main.asyncAfter(deadline: when){
-                    let msg = "Next departure:" + "\r\n" + "Duration: " + self.message + "\r\n" + "Departure time: " + self.departureTime + "\r\n" + "Arrival time: " + self.arrivalTime
+                    var msg: String
+                    if(self.message != ""){
+                        msg = " NEXT DEPATURE" + "\r\n" + "Duration: " + self.message + "\r\n" + "Departure time: " + self.departureTime + "\r\n" + "Arrival time: " + self.arrivalTime
+                    }else{
+                        msg = "Unable to get data" + "\r\n" + "Feel free to retry"
+                    }
                     let alertController = UIAlertController(title: "Estimated duration", message: msg, preferredStyle: .alert)
                     let cancelAction = UIAlertAction(title: "Dismiss", style: .cancel) { (_) in }
                     alertController.addAction(cancelAction)
