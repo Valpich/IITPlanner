@@ -62,6 +62,23 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
                 task.resume()
             }
         }
+        func forDataArrival(arrivalTime: String, origin: String, destination: String, completion: @escaping (String) -> ()) {
+            if let url = URL(string: "https://maps.googleapis.com/maps/api/directions/json?origin=\(origin)&destination=\(destination)&mode=transit&key=AIzaSyCowB88aliJqJuGNEsUjInIXMCKPxA9VJs") {
+                var request = URLRequest(url: url)
+                request.httpMethod = "POST"
+                let postString : String = "uid=59"
+                request.httpBody = postString.data(using: String.Encoding.utf8)
+                let task = URLSession.shared.dataTask(with: request) {
+                    data, response, error in
+                    if let data = data, let jsonString = String(data: data, encoding: String.Encoding.utf8) , error == nil {
+                        completion(jsonString)
+                    } else {
+                        print("error=\(error!.localizedDescription)")
+                    }
+                }
+                task.resume()
+            }
+        }
     }
     
     override func shouldPerformSegue(withIdentifier: String?, sender: Any?) -> Bool {
@@ -189,7 +206,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             if CLLocationManager.locationServicesEnabled() {
                 locationManager.startUpdatingLocation()
             }
-            let time = DispatchTime.now() + 0.5
+            let time = DispatchTime.now() + 1
             DispatchQueue.main.asyncAfter(deadline: time){
                 let origin = String(self.locValue.latitude) + " " + String(self.locValue.longitude)
                 var destination = self.courses[indexPath.item].value(forKey: "address") as! String
@@ -203,7 +220,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
                 //Two is the number of seconds to delay
                 let when = DispatchTime.now() + 1
                 DispatchQueue.main.asyncAfter(deadline: when){
-                    let msg = "Duration: " + self.message + "\r\n" + "Departure time: " + self.departureTime + "\r\n" + "Arrival time: " + self.arrivalTime
+                    let msg = "Next departure:" + "\r\n" + "Duration: " + self.message + "\r\n" + "Departure time: " + self.departureTime + "\r\n" + "Arrival time: " + self.arrivalTime
                     let alertController = UIAlertController(title: "Estimated duration", message: msg, preferredStyle: .alert)
                     let cancelAction = UIAlertAction(title: "Dismiss", style: .cancel) { (_) in }
                     alertController.addAction(cancelAction)

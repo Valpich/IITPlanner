@@ -449,7 +449,7 @@
 				CODE_SIGN_ENTITLEMENTS = IITPlanner/IITPlanner.entitlements;
 				DEVELOPMENT_TEAM = 57K4Z8397N;
 				INFOPLIST_FILE = IITPlanner/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = Pich.CoursePlanner;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -466,7 +466,7 @@
 				CODE_SIGN_ENTITLEMENTS = IITPlanner/IITPlanner.entitlements;
 				DEVELOPMENT_TEAM = 57K4Z8397N;
 				INFOPLIST_FILE = IITPlanner/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = Pich.CoursePlanner;
 				PRODUCT_NAME = "$(TARGET_NAME)";
