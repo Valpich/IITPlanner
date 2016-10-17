@@ -198,6 +198,18 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         return result
     }
     
+    func getDurationArrivalBased(arrival: TimeInterval, origin: String, destination: String) -> String{
+        let pfd = PostForData()
+        var result = ""
+        let arrivalInterval = String(format:"%.0f", arrival)
+        // you call the method with a trailing closure
+        pfd.forDataArrivalBased(arrivalTime: arrivalInterval, origin: origin.replacingOccurrences(of: " ", with: "%20"),destination: destination.replacingOccurrences(of: " ", with: "%20")) {
+            jsonString in
+            result.append(self.parseJSONArrivalBased(data: jsonString.data(using: .utf8)!))
+        }
+        return result
+    }
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
@@ -260,12 +272,19 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
                 let day = self.courses[indexPath.item].value(forKey: "day") as! String
                 let timeInterval = self.getNextTime(day: day, time: time)
                 self.message = self.getDuration(origin: origin, destination: destination)
+                if(timeInterval != nil){
+                    self.messageArrivalBased = self.getDurationArrivalBased(arrival: timeInterval!.timeIntervalSince1970 ,origin: origin, destination: destination)
+                }
                 //One is the number of seconds to delay
                 let when = DispatchTime.now() + 2
                 DispatchQueue.main.asyncAfter(deadline: when){
                     var msg: String
+                    print(self.message)
                     if(self.message != ""){
                         msg = " NEXT DEPATURE" + "\r\n" + "Duration: " + self.message + "\r\n" + "Departure time: " + self.departureTime + "\r\n" + "Arrival time: " + self.arrivalTime
+                        if(self.messageArrivalBased != ""){
+                            msg += "\r\n" + " LAST DEPATURE" + "\r\n" + "Duration: " + self.messageArrivalBased + "\r\n" + "Departure time: " + self.departureTimeArrivalBased + "\r\n" + "Arrival time: " + self.arrivalTimeArrivalBased
+                        }
                     }else{
                         msg = "Unable to get data" + "\r\n" + "Feel free to retry"
                     }
@@ -396,23 +415,29 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         }
     }
     
-    func getNextTime(day:String, time:Date) -> TimeInterval?
-    {
+    func getNextTime(day:String, time:Date) -> Date?{
         let date = Date()
         let calendar = Calendar.current
-        
         let year = calendar.component(.year, from: date)
         let month = calendar.component(.month, from: date)
         let currentDay = calendar.component(.day, from: date)
-        
-        print(year)
-        print(month)
-        print(day)
-        print(date.timeIntervalSince1970)
+        let hour = calendar.component(.hour, from: time)
+        let minute = calendar.component(.minute, from: time)
+        //Create a new date with the user hour and minute
+        var newDate: Date = calendar.date(bySettingHour: hour, minute: minute, second: 0, of: date)!
+        //Get the current weekday
         let weekday = self.getDayOfWeek(today: "\(year)-\(month)-\(currentDay)")
-        print(weekday) // 4 = Wednesday
-        print(self.dayOfTheWeekToInt(dayOfTheWeek: day))
-        return nil
+        //Get the difference between today and the next corresponding day
+        let dayInterval = ( -weekday! + self.dayOfTheWeekToInt(dayOfTheWeek: day) + 7 ) % 7
+        //Add the day(s) converted into timeInterval
+        let timeInterval = 60*60*24*dayInterval
+        newDate = newDate.addingTimeInterval(TimeInterval(timeInterval))
+        if(date.timeIntervalSince1970 < newDate.timeIntervalSince1970){
+            return newDate
+        }else{
+            return nil
+        }
     }
+
 }
 
